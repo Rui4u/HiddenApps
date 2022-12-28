@@ -1,0 +1,621 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		55A29D5C295ACCC900C01933 /* ScreenLockApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A29D5B295ACCC900C01933 /* ScreenLockApp.swift */; };
+		55A29D60295ACCCB00C01933 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A29D5F295ACCCB00C01933 /* Assets.xcassets */; };
+		55A29D63295ACCCB00C01933 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A29D62295ACCCB00C01933 /* Preview Assets.xcassets */; };
+		55A29D65295ACCCB00C01933 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A29D64295ACCCB00C01933 /* Persistence.swift */; };
+		55A29D68295ACCCB00C01933 /* ScreenLock.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55A29D66295ACCCB00C01933 /* ScreenLock.xcdatamodeld */; };
+		55A29D72295ACCCB00C01933 /* ScreenLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A29D71295ACCCB00C01933 /* ScreenLockTests.swift */; };
+		55A29D7C295ACCCB00C01933 /* ScreenLockUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A29D7B295ACCCB00C01933 /* ScreenLockUITests.swift */; };
+		55A29D7E295ACCCB00C01933 /* ScreenLockUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A29D7D295ACCCB00C01933 /* ScreenLockUITestsLaunchTests.swift */; };
+		55A29D8D295AF70100C01933 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A29D8C295AF70100C01933 /* MainView.swift */; };
+		55A29D8F295BEB6000C01933 /* ScreenCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A29D8E295BEB6000C01933 /* ScreenCardView.swift */; };
+		55A29D91295BF3E200C01933 /* ScreenLockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A29D90295BF3E200C01933 /* ScreenLockManager.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		55A29D6E295ACCCB00C01933 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55A29D50295ACCC900C01933 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55A29D57295ACCC900C01933;
+			remoteInfo = ScreenLock;
+		};
+		55A29D78295ACCCB00C01933 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55A29D50295ACCC900C01933 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55A29D57295ACCC900C01933;
+			remoteInfo = ScreenLock;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		55A29D58295ACCC900C01933 /* ScreenLock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScreenLock.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		55A29D5B295ACCC900C01933 /* ScreenLockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLockApp.swift; sourceTree = "<group>"; };
+		55A29D5F295ACCCB00C01933 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		55A29D62295ACCCB00C01933 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		55A29D64295ACCCB00C01933 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		55A29D67295ACCCB00C01933 /* ScreenLock.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ScreenLock.xcdatamodel; sourceTree = "<group>"; };
+		55A29D6D295ACCCB00C01933 /* ScreenLockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScreenLockTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		55A29D71295ACCCB00C01933 /* ScreenLockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLockTests.swift; sourceTree = "<group>"; };
+		55A29D77295ACCCB00C01933 /* ScreenLockUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScreenLockUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		55A29D7B295ACCCB00C01933 /* ScreenLockUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLockUITests.swift; sourceTree = "<group>"; };
+		55A29D7D295ACCCB00C01933 /* ScreenLockUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLockUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		55A29D8A295ACE3600C01933 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		55A29D8B295ACECF00C01933 /* ScreenLock.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScreenLock.entitlements; sourceTree = "<group>"; };
+		55A29D8C295AF70100C01933 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		55A29D8E295BEB6000C01933 /* ScreenCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCardView.swift; sourceTree = "<group>"; };
+		55A29D90295BF3E200C01933 /* ScreenLockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLockManager.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		55A29D55295ACCC900C01933 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55A29D6A295ACCCB00C01933 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55A29D74295ACCCB00C01933 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		55A29D4F295ACCC900C01933 = {
+			isa = PBXGroup;
+			children = (
+				55A29D5A295ACCC900C01933 /* ScreenLock */,
+				55A29D70295ACCCB00C01933 /* ScreenLockTests */,
+				55A29D7A295ACCCB00C01933 /* ScreenLockUITests */,
+				55A29D59295ACCC900C01933 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		55A29D59295ACCC900C01933 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				55A29D58295ACCC900C01933 /* ScreenLock.app */,
+				55A29D6D295ACCCB00C01933 /* ScreenLockTests.xctest */,
+				55A29D77295ACCCB00C01933 /* ScreenLockUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		55A29D5A295ACCC900C01933 /* ScreenLock */ = {
+			isa = PBXGroup;
+			children = (
+				55A29D8B295ACECF00C01933 /* ScreenLock.entitlements */,
+				55A29D8A295ACE3600C01933 /* Info.plist */,
+				55A29D5B295ACCC900C01933 /* ScreenLockApp.swift */,
+				55A29D8C295AF70100C01933 /* MainView.swift */,
+				55A29D8E295BEB6000C01933 /* ScreenCardView.swift */,
+				55A29D5F295ACCCB00C01933 /* Assets.xcassets */,
+				55A29D64295ACCCB00C01933 /* Persistence.swift */,
+				55A29D66295ACCCB00C01933 /* ScreenLock.xcdatamodeld */,
+				55A29D61295ACCCB00C01933 /* Preview Content */,
+				55A29D90295BF3E200C01933 /* ScreenLockManager.swift */,
+			);
+			path = ScreenLock;
+			sourceTree = "<group>";
+		};
+		55A29D61295ACCCB00C01933 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				55A29D62295ACCCB00C01933 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		55A29D70295ACCCB00C01933 /* ScreenLockTests */ = {
+			isa = PBXGroup;
+			children = (
+				55A29D71295ACCCB00C01933 /* ScreenLockTests.swift */,
+			);
+			path = ScreenLockTests;
+			sourceTree = "<group>";
+		};
+		55A29D7A295ACCCB00C01933 /* ScreenLockUITests */ = {
+			isa = PBXGroup;
+			children = (
+				55A29D7B295ACCCB00C01933 /* ScreenLockUITests.swift */,
+				55A29D7D295ACCCB00C01933 /* ScreenLockUITestsLaunchTests.swift */,
+			);
+			path = ScreenLockUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		55A29D57295ACCC900C01933 /* ScreenLock */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55A29D81295ACCCB00C01933 /* Build configuration list for PBXNativeTarget "ScreenLock" */;
+			buildPhases = (
+				55A29D54295ACCC900C01933 /* Sources */,
+				55A29D55295ACCC900C01933 /* Frameworks */,
+				55A29D56295ACCC900C01933 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ScreenLock;
+			productName = ScreenLock;
+			productReference = 55A29D58295ACCC900C01933 /* ScreenLock.app */;
+			productType = "com.apple.product-type.application";
+		};
+		55A29D6C295ACCCB00C01933 /* ScreenLockTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55A29D84295ACCCB00C01933 /* Build configuration list for PBXNativeTarget "ScreenLockTests" */;
+			buildPhases = (
+				55A29D69295ACCCB00C01933 /* Sources */,
+				55A29D6A295ACCCB00C01933 /* Frameworks */,
+				55A29D6B295ACCCB00C01933 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				55A29D6F295ACCCB00C01933 /* PBXTargetDependency */,
+			);
+			name = ScreenLockTests;
+			productName = ScreenLockTests;
+			productReference = 55A29D6D295ACCCB00C01933 /* ScreenLockTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		55A29D76295ACCCB00C01933 /* ScreenLockUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55A29D87295ACCCB00C01933 /* Build configuration list for PBXNativeTarget "ScreenLockUITests" */;
+			buildPhases = (
+				55A29D73295ACCCB00C01933 /* Sources */,
+				55A29D74295ACCCB00C01933 /* Frameworks */,
+				55A29D75295ACCCB00C01933 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				55A29D79295ACCCB00C01933 /* PBXTargetDependency */,
+			);
+			name = ScreenLockUITests;
+			productName = ScreenLockUITests;
+			productReference = 55A29D77295ACCCB00C01933 /* ScreenLockUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		55A29D50295ACCC900C01933 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					55A29D57295ACCC900C01933 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					55A29D6C295ACCCB00C01933 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 55A29D57295ACCC900C01933;
+					};
+					55A29D76295ACCCB00C01933 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 55A29D57295ACCC900C01933;
+					};
+				};
+			};
+			buildConfigurationList = 55A29D53295ACCC900C01933 /* Build configuration list for PBXProject "ScreenLock" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 55A29D4F295ACCC900C01933;
+			productRefGroup = 55A29D59295ACCC900C01933 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				55A29D57295ACCC900C01933 /* ScreenLock */,
+				55A29D6C295ACCCB00C01933 /* ScreenLockTests */,
+				55A29D76295ACCCB00C01933 /* ScreenLockUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		55A29D56295ACCC900C01933 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55A29D63295ACCCB00C01933 /* Preview Assets.xcassets in Resources */,
+				55A29D60295ACCCB00C01933 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55A29D6B295ACCCB00C01933 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55A29D75295ACCCB00C01933 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		55A29D54295ACCC900C01933 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55A29D68295ACCCB00C01933 /* ScreenLock.xcdatamodeld in Sources */,
+				55A29D65295ACCCB00C01933 /* Persistence.swift in Sources */,
+				55A29D8F295BEB6000C01933 /* ScreenCardView.swift in Sources */,
+				55A29D91295BF3E200C01933 /* ScreenLockManager.swift in Sources */,
+				55A29D8D295AF70100C01933 /* MainView.swift in Sources */,
+				55A29D5C295ACCC900C01933 /* ScreenLockApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55A29D69295ACCCB00C01933 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55A29D72295ACCCB00C01933 /* ScreenLockTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55A29D73295ACCCB00C01933 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55A29D7C295ACCCB00C01933 /* ScreenLockUITests.swift in Sources */,
+				55A29D7E295ACCCB00C01933 /* ScreenLockUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		55A29D6F295ACCCB00C01933 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55A29D57295ACCC900C01933 /* ScreenLock */;
+			targetProxy = 55A29D6E295ACCCB00C01933 /* PBXContainerItemProxy */;
+		};
+		55A29D79295ACCCB00C01933 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55A29D57295ACCC900C01933 /* ScreenLock */;
+			targetProxy = 55A29D78295ACCCB00C01933 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		55A29D7F295ACCCB00C01933 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		55A29D80295ACCCB00C01933 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		55A29D82295ACCCB00C01933 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ScreenLock/ScreenLock.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ScreenLock/Preview Content\"";
+				DEVELOPMENT_TEAM = 3CGKDFZPAL;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ScreenLock/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sr.screenlook;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		55A29D83295ACCCB00C01933 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ScreenLock/ScreenLock.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ScreenLock/Preview Content\"";
+				DEVELOPMENT_TEAM = 3CGKDFZPAL;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ScreenLock/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sr.screenlook;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		55A29D85295ACCCB00C01933 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.ScreenLockTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScreenLock.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ScreenLock";
+			};
+			name = Debug;
+		};
+		55A29D86295ACCCB00C01933 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.ScreenLockTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScreenLock.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ScreenLock";
+			};
+			name = Release;
+		};
+		55A29D88295ACCCB00C01933 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.ScreenLockUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ScreenLock;
+			};
+			name = Debug;
+		};
+		55A29D89295ACCCB00C01933 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.ScreenLockUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ScreenLock;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		55A29D53295ACCC900C01933 /* Build configuration list for PBXProject "ScreenLock" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55A29D7F295ACCCB00C01933 /* Debug */,
+				55A29D80295ACCCB00C01933 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		55A29D81295ACCCB00C01933 /* Build configuration list for PBXNativeTarget "ScreenLock" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55A29D82295ACCCB00C01933 /* Debug */,
+				55A29D83295ACCCB00C01933 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		55A29D84295ACCCB00C01933 /* Build configuration list for PBXNativeTarget "ScreenLockTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55A29D85295ACCCB00C01933 /* Debug */,
+				55A29D86295ACCCB00C01933 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		55A29D87295ACCCB00C01933 /* Build configuration list for PBXNativeTarget "ScreenLockUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55A29D88295ACCCB00C01933 /* Debug */,
+				55A29D89295ACCCB00C01933 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		55A29D66295ACCCB00C01933 /* ScreenLock.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				55A29D67295ACCCB00C01933 /* ScreenLock.xcdatamodel */,
+			);
+			currentVersion = 55A29D67295ACCCB00C01933 /* ScreenLock.xcdatamodel */;
+			path = ScreenLock.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 55A29D50295ACCC900C01933 /* Project object */;
+}
