@@ -54,11 +54,11 @@ struct ScreenCardView: View {
     
     func hiddenIsOpen(isOpen: Bool, name:String) {
         if (isOpen) {
-            if let find = ScreenLockManager.find(Set<ApplicationToken>.self, key: "applicationToken" + "_" + "\(group.name)") {
+            if let find = ScreenLockManager.find(Set<ApplicationToken>.self, groupType: .applicationToken, groupName: group.name) {
                 ManagedSettingsStore(named: ManagedSettingsStore.Name(name)).application.blockedApplications = Set(find.map({Application(token: $0)}))
             }
             
-            if let find = ScreenLockManager.find(Set<WebDomainToken>.self, key: "domainsToken" + "_" + "\(group.name)") {
+            if let find = ScreenLockManager.find(Set<WebDomainToken>.self, groupType: .domainsToken, groupName: group.name) {
                 ManagedSettingsStore(named: ManagedSettingsStore.Name(name)).shield.webDomains = Set(find)
             }
             
@@ -117,28 +117,9 @@ struct CardViewMainView: View {
         .onChange(of: selection) { newSelection in
             
             var isSame = 0;
-            if let find = ScreenLockManager.find(Set<ApplicationToken>.self, key: "applicationToken" + "_" + "\(group.name)") {
-                if selection.applicationTokens == find {
-                    isSame = isSame + 1
-                }
-                
-            }
-            
-            if let find = ScreenLockManager.find(Set<WebDomainToken>.self, key: "domainsToken" + "_" + "\(group.name)") {
-                if selection.webDomainTokens == find {
-                    isSame = isSame + 1
-                }
-            }
-            
-            if let find = ScreenLockManager.find(Set<ActivityCategoryToken>.self, key: "categoryTokens" + "_" + "\(group.name)") {
-                if selection.categoryTokens == find {
-                    isSame = isSame + 1
-                }
-            }
-            if isSame == 3 {
+            if ScreenLockManager.compare(selection: selection, groupName: group.name) {
                 return
             }
-            
             
             ManagedSettingsStore(named: ManagedSettingsStore.Name(group.name)).clearAllSettings()
             group.open = false;
@@ -155,26 +136,14 @@ struct CardViewMainView: View {
             
             group.count = applicationsTokens.count + webDomainsTokens.count
             
-            ScreenLockManager.save(applicationsTokens, key: "applicationToken" + "_" + "\(group.name)")
-            ScreenLockManager.save(webDomainsTokens, key: "domainsToken" + "_" + "\(group.name)")
-            ScreenLockManager.save(categoryTokens, key: "categoryTokens" + "_" + "\(group.name)")
+            ScreenLockManager.save(applicationsTokens, groupType: .applicationToken, groupName: group.name)
+            ScreenLockManager.save(webDomainsTokens, groupType: .domainsToken, groupName: group.name)
+            ScreenLockManager.save(categoryTokens, groupType: .categoryTokens, groupName: group.name)
             ScreenLockManager.saveGroup(group: group)
-            
             
         }
         .onAppear {
-            
-            if let find = ScreenLockManager.find(Set<ApplicationToken>.self, key: "applicationToken" + "_" + "\(group.name)") {
-                selection.applicationTokens = find
-            }
-            
-            if let find = ScreenLockManager.find(Set<WebDomainToken>.self, key: "domainsToken" + "_" + "\(group.name)") {
-                selection.webDomainTokens = find
-            }
-            
-            if let find = ScreenLockManager.find(Set<ActivityCategoryToken>.self, key: "categoryTokens" + "_" + "\(group.name)") {
-                selection.categoryTokens = find
-            }
+            ScreenLockManager.loadLocatinData(selection: &selection, groupName: group.name)
         }
     }
 }

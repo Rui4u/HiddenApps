@@ -7,6 +7,7 @@
 
 import Foundation
 import ManagedSettings
+import FamilyControls
 
 
 class ScreenLockGroup: Identifiable, ObservableObject {
@@ -53,8 +54,12 @@ class ScreenLockManager: ObservableObject {
     }
     
 
+    static func save(_ value: Encodable, groupType : GroupType, groupName: String) {
+        let key = groupType.key(groupName)
+        save(value, key: key)
+    }
     
-    static func save(_ value: Encodable, key:String) {
+    private static func save(_ value: Encodable, key:String) {
         let encoder = JSONEncoder()
         if let data = try? encoder.encode(value) {
             let str = String(data: data, encoding: .utf8)!
@@ -62,7 +67,7 @@ class ScreenLockManager: ObservableObject {
         }
     }
     
-    static func find<T: Decodable>(_ type: T.Type, key:String) -> T? {
+    private static func find<T: Decodable>(_ type: T.Type, key:String) -> T? {
         if let applicationToken = UserDefaults.standard.value(forKey: key) as? String {
             let jsonData = applicationToken.data(using: .utf8)
             let decoder = JSONDecoder()
@@ -71,6 +76,11 @@ class ScreenLockManager: ObservableObject {
             }
         }
         return nil
+    }
+    
+    static func find<T: Decodable>(_ type: T.Type, groupType : GroupType, groupName: String) -> T? {
+        let key = groupType.key(groupName)
+        return find(type, key: key)
     }
     
     static func saveGroup(group: ScreenLockGroup) {
@@ -83,5 +93,65 @@ class ScreenLockManager: ObservableObject {
         save(list, key: "group_key")
         ScreenLockManager.group()
     }
+    
+    static func compare(selection : FamilyActivitySelection, groupName:String) -> Bool{
+        var isSame = 0
+        if let find = ScreenLockManager.find(Set<ApplicationToken>.self, groupType: .applicationToken, groupName: groupName) {
+            if selection.applicationTokens == find {
+                isSame = isSame + 1
+            }
+            
+        }
+        
+        if let find = ScreenLockManager.find(Set<WebDomainToken>.self,  groupType: .domainsToken, groupName: groupName) {
+            if selection.webDomainTokens == find {
+                isSame = isSame + 1
+            }
+        }
+        
+        if let find = ScreenLockManager.find(Set<ActivityCategoryToken>.self, groupType: .categoryTokens, groupName: groupName) {
+            if selection.categoryTokens == find {
+                isSame = isSame + 1
+            }
+        }
+        if isSame == 3 {
+            return true
+        }
+        
+        return false
+    }
+    
+    static func loadLocatinData(selection : inout  FamilyActivitySelection, groupName:String){
+        
+        if let find = ScreenLockManager.find(Set<ApplicationToken>.self, groupType: .applicationToken, groupName: groupName) {
+            selection.applicationTokens = find
+        }
+        
+        if let find = ScreenLockManager.find(Set<WebDomainToken>.self,  groupType: .domainsToken, groupName: groupName) {
+            selection.webDomainTokens = find
+        }
+        
+        if let find = ScreenLockManager.find(Set<ActivityCategoryToken>.self, groupType: .categoryTokens, groupName: groupName) {
+            selection.categoryTokens = find
+        }
+    }
+}
 
+
+
+enum GroupType: String {
+    case applicationToken
+    case domainsToken
+    case categoryTokens
+    
+    func key(_ groupName: String) -> String {
+        switch self {
+        case .applicationToken:
+            return "applicationToken" + "_" + groupName
+        case .domainsToken:
+            return "domainsToken" + "_" + groupName
+        case .categoryTokens:
+            return  "categoryTokens" + "_" + groupName
+        }
+    }
 }
