@@ -15,6 +15,7 @@ struct ScreenCardView: View {
     @State var showToast = false;
     @State var selection = FamilyActivitySelection(includeEntireCategory: true)
     @ObservedObject var group :ScreenLockGroup
+    let cornerRadius: CGFloat = 10
     var body: some View {
         ZStack {
             VStack {
@@ -28,12 +29,12 @@ struct ScreenCardView: View {
                     } label: {
                         ZStack {
                             if (group.open) {
-                                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
                                     .stroke(group.open ? .white : .blue, lineWidth: 2)
                                     .background(group.open ? .blue : .white)
-                                    .cornerRadius(20)
+                                    .cornerRadius(cornerRadius)
                             } else {
-                                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
                                     .stroke(group.open ? .white : .blue, lineWidth: 2)
                                     .background(group.open ? .blue : .white)
                             }
@@ -53,19 +54,7 @@ struct ScreenCardView: View {
     }
     
     func hiddenIsOpen(isOpen: Bool, name:String) {
-        if (isOpen) {
-            if let find = ScreenLockManager.find(Set<ApplicationToken>.self, groupType: .applicationToken, groupName: group.name) {
-                ManagedSettingsStore(named: ManagedSettingsStore.Name(name)).application.blockedApplications = Set(find.map({Application(token: $0)}))
-            }
-            
-            if let find = ScreenLockManager.find(Set<WebDomainToken>.self, groupType: .domainsToken, groupName: group.name) {
-                ManagedSettingsStore(named: ManagedSettingsStore.Name(name)).shield.webDomains = Set(find)
-            }
-            
-        } else {
-            ManagedSettingsStore(named: ManagedSettingsStore.Name(name)).clearAllSettings()
-        }
-
+        group.open = isOpen
     }
     
 }
@@ -82,11 +71,12 @@ struct CardViewMainView: View {
                 .foregroundColor(.white)
             HStack {
                 Text(group.name)
-                    .font(.title3)
+                    .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.blue)
                 Spacer()
                 Text(group.count > 0 ? String(group.count) : "请添加")
+                    .fontWeight(.bold)
             }
         }
         .swipeActions(edge: .leading) {
@@ -116,29 +106,22 @@ struct CardViewMainView: View {
                                selection: $selection)
         .onChange(of: selection) { newSelection in
             
-            var isSame = 0;
-            if ScreenLockManager.compare(selection: selection, groupName: group.name) {
+            
+            if ScreenLockManager.compare(selection: selection, group: group) {
                 return
             }
-            
-            ManagedSettingsStore(named: ManagedSettingsStore.Name(group.name)).clearAllSettings()
-            group.open = false;
-            
-//            let applications = selection.applications
-//            let webDomains = selection.webDomains
-//            ManagedSettingsStore(named: .social).application.blockedApplications = applications
-//            ManagedSettingsStore(named: .social).shield.webDomains = Set(webDomains.map({$0.token!}))
-            
             
             let applicationsTokens = selection.applicationTokens
             let webDomainsTokens = selection.webDomainTokens
             let categoryTokens = selection.categoryTokens
             
+            ManagedSettingsStore(named: ManagedSettingsStore.Name(group.name)).clearAllSettings()
+            group.open = false;
             group.count = applicationsTokens.count + webDomainsTokens.count
-            
-            ScreenLockManager.save(applicationsTokens, groupType: .applicationToken, groupName: group.name)
-            ScreenLockManager.save(webDomainsTokens, groupType: .domainsToken, groupName: group.name)
-            ScreenLockManager.save(categoryTokens, groupType: .categoryTokens, groupName: group.name)
+            group.applicationTokens = applicationsTokens
+            group.webDomainTokens = webDomainsTokens
+            group.activityCategoryTokens = categoryTokens;
+            group.count = group.updateCount
             ScreenLockManager.saveGroup(group: group)
             
         }
@@ -163,7 +146,7 @@ struct TWToastView: View {
     var body: some View {
         ZStack {
             Text(info)
-                .font(Font.title3)
+                .font(.system(size: 14))
                 .foregroundColor(.white)
                 .frame(minWidth: 80, alignment: Alignment.center)
                 .zIndex(1.0)
@@ -171,7 +154,6 @@ struct TWToastView: View {
                 .background(
                     RoundedRectangle(cornerRadius: 12)
                         .foregroundColor(.black)
-                        .opacity(0.6)
                 )
             
         }

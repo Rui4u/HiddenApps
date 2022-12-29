@@ -9,11 +9,17 @@ import SwiftUI
 import FamilyControls
 import DeviceActivity
 
-extension DeviceActivityName{
-    static let activity = Self("activity")
+class AppDelegate:NSObject,UIApplicationDelegate{
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        print("I am back")
+        return true
+    }
 }
+
+
 @main
 struct ScreenLockApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     let center = AuthorizationCenter.shared
     let deviceActivityCenter = DeviceActivityCenter()
     var body: some Scene {
@@ -27,7 +33,7 @@ struct ScreenLockApp: App {
                         print(error)
                     }
                 }
-                _ = ScreenLockManager.group()
+                ScreenLockManager.update()
             }
         }
     }
