@@ -11,18 +11,6 @@ import FamilyControls
 import UIKit
 
 class ScreenLockGroup: Identifiable, ObservableObject {
-    
-    struct ScreenLockGroupStruct: Codable {
-        var name: String
-        var open: Bool
-        var count: Int {
-            applicationTokens.count + webDomainTokens.count + activityCategoryTokens.count
-        }
-        var applicationTokens: Set<ApplicationToken>
-        var webDomainTokens: Set<WebDomainToken>
-        var activityCategoryTokens: Set<ActivityCategoryToken>
-    }
-    
     @Published var name: String
     @Published var open: Bool {
         didSet {
@@ -60,18 +48,34 @@ class ScreenLockGroup: Identifiable, ObservableObject {
         self.activityCategoryTokens = activityCategoryTokens
         managedSettingsStore()
     }
+}
+
+extension ScreenLockGroup {
+    
+    struct ScreenLockGroupStruct: Codable {
+        var name: String
+        var open: Bool
+        var count: Int {
+            applicationTokens.count + webDomainTokens.count + activityCategoryTokens.count
+        }
+        var applicationTokens: Set<ApplicationToken>
+        var webDomainTokens: Set<WebDomainToken>
+        var activityCategoryTokens: Set<ActivityCategoryToken>
+    }
     
     func toStruct() -> ScreenLockGroupStruct {
         ScreenLockGroupStruct(name: name, open: open, applicationTokens: applicationTokens, webDomainTokens: webDomainTokens,activityCategoryTokens: activityCategoryTokens)
     }
 }
 
+
+
 class ScreenLockManager: ObservableObject {
     static var manager = ScreenLockManager()
     @Published var dataSource : [ScreenLockGroup] = [ScreenLockGroup]()
     
     static func update() {
-        let list = find([ScreenLockGroup.ScreenLockGroupStruct].self, key: "group_key")
+        let list = LocationManager.find([ScreenLockGroup.ScreenLockGroupStruct].self, key: "group_key")
         manager.dataSource = list?.map({
             ScreenLockGroup(name: $0.name, open: $0.open, count: $0.count, applicationTokens: $0.applicationTokens, webDomainTokens: $0.webDomainTokens, activityCategoryTokens: $0.activityCategoryTokens)
         }) ?? [ScreenLockGroup]()
@@ -79,49 +83,29 @@ class ScreenLockManager: ObservableObject {
     
     static func delete(id: String) {
         manager.dataSource = manager.dataSource.filter({$0.id != id})
-        var list = find([ScreenLockGroup.ScreenLockGroupStruct].self, key: "group_key") ?? [ScreenLockGroup.ScreenLockGroupStruct]()
+        var list = LocationManager.find([ScreenLockGroup.ScreenLockGroupStruct].self, key: "group_key") ?? [ScreenLockGroup.ScreenLockGroupStruct]()
         list = list.filter({$0.name != id})
-        save(list, key: "group_key")
+        LocationManager.save(list, key: "group_key")
         ScreenLockManager.update()
     }
     
-    
-    static func save(_ value: Encodable, key:String) {
-        let encoder = JSONEncoder()
-        if let data = try? encoder.encode(value) {
-            let str = String(data: data, encoding: .utf8)!
-            UserDefaults.standard.setValue(str, forKey: key)
-        }
-    }
-    
-    static func find<T: Decodable>(_ type: T.Type, key:String) -> T? {
-        if let applicationToken = UserDefaults.standard.value(forKey: key) as? String {
-            let jsonData = applicationToken.data(using: .utf8)
-            let decoder = JSONDecoder()
-            if let result = try? decoder.decode(type, from: jsonData!) {
-                return result
-            }
-        }
-        return nil
-    }
-    
     static func saveGroup(group: ScreenLockGroup) {
-        var list = find([ScreenLockGroup.ScreenLockGroupStruct].self, key: "group_key") ?? [ScreenLockGroup.ScreenLockGroupStruct]()
+        var list = LocationManager.find([ScreenLockGroup.ScreenLockGroupStruct].self, key: "group_key") ?? [ScreenLockGroup.ScreenLockGroupStruct]()
         if let index = list.firstIndex(where: {$0.name == group.name}) {
             list[index] = group.toStruct()
         } else {
             list.append(group.toStruct())
         }
-        save(list, key: "group_key")
+        LocationManager.save(list, key: "group_key")
         ScreenLockManager.update()
     }
     
     static func closeAllGroup() {
-        var list = find([ScreenLockGroup.ScreenLockGroupStruct].self, key: "group_key") ?? [ScreenLockGroup.ScreenLockGroupStruct]()
+        var list = LocationManager.find([ScreenLockGroup.ScreenLockGroupStruct].self, key: "group_key") ?? [ScreenLockGroup.ScreenLockGroupStruct]()
         for index in 0..<list.count {
             list[index].open = false
         }
-        save(list, key: "group_key")
+        LocationManager.save(list, key: "group_key")
         ScreenLockManager.update()
     }
     
@@ -147,7 +131,7 @@ class ScreenLockManager: ObservableObject {
     
     static func loadLocatinData(selection : inout  FamilyActivitySelection, groupName:String){
         
-        if let locationGroup = ScreenLockManager.find([ScreenLockGroup.ScreenLockGroupStruct].self,key: "group_key")?.filter({$0.name == groupName }).first {
+        if let locationGroup = LocationManager.find([ScreenLockGroup.ScreenLockGroupStruct].self,key: "group_key")?.filter({$0.name == groupName }).first {
             selection.applicationTokens = locationGroup.applicationTokens
             selection.webDomainTokens = locationGroup.webDomainTokens
             selection.categoryTokens = locationGroup.activityCategoryTokens

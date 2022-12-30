@@ -11,7 +11,7 @@ import DeviceActivity
 
 class AppDelegate:NSObject,UIApplicationDelegate{
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        print("I am back")
+        LaunchManager.shared.showPasswordView = LaunchManager.shared.passManager.setPassword.maxCount == LaunchManager.shared.passManager.locationPassword.count
         return true
     }
 }
@@ -22,18 +22,29 @@ struct ScreenLockApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     let center = AuthorizationCenter.shared
     let deviceActivityCenter = DeviceActivityCenter()
+    @ObservedObject var launchManager = LaunchManager.shared
+    
     var body: some Scene {
         WindowGroup {
-            MainView()
-            .onAppear {
-                Task {
-                    do {
-                        try await center.requestAuthorization(for: .individual)
-                    } catch {
-                        print(error)
-                    }
+            if (LaunchManager.shared.showPasswordView) {
+                PasswordView(showPassword: $launchManager.showPasswordView, manager: launchManager.passManager)
+            } else {
+                if (LaunchManager.shared.type == .main) {
+                    MainView()
+                        .onAppear {
+                            Task {
+                                do {
+                                    try await center.requestAuthorization(for: .individual)
+                                } catch {
+                                    print(error)
+                                }
+                            }
+                            ScreenLockManager.update()
+                            
+                        }
+                } else {
+                    Text("笔记")
                 }
-                ScreenLockManager.update()
             }
         }
     }

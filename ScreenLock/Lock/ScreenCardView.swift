@@ -79,18 +79,6 @@ struct CardViewMainView: View {
                     .fontWeight(.bold)
             }
         }
-        .swipeActions(edge: .leading) {
-            Button {
-                group.open.toggle()
-                ScreenLockManager.saveGroup(group: group)
-            } label: {
-                if group.open {
-                    Label("Read", systemImage: "envelope.open")
-                } else {
-                    Label("Unread", systemImage: "envelope.badge")
-                }
-            }
-        }
         .swipeActions(edge: .trailing) {
             Button (role: .destructive){
                 ScreenLockManager.delete(id:group.id)
@@ -116,7 +104,6 @@ struct CardViewMainView: View {
             let categoryTokens = selection.categoryTokens
             
             ManagedSettingsStore(named: ManagedSettingsStore.Name(group.name)).clearAllSettings()
-            group.open = false;
             group.count = applicationsTokens.count + webDomainsTokens.count
             group.applicationTokens = applicationsTokens
             group.webDomainTokens = webDomainsTokens

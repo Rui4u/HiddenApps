@@ -113,6 +113,10 @@ struct CategoryHome: View {
 
 struct YLMine: View {
     @State var showPassword = false;
+    @State var showSubstitutePassword = false;
+    
+    @State var showPasswordToggle = false;
+    @State var showSubstitutePasswordToggle = false;
     var body: some View {
         NavigationView {
             List {
@@ -123,11 +127,28 @@ struct YLMine: View {
                 }
                 
                 Section {
-                    Button("设置密码") {
-                        showPassword.toggle()
+                    HStack {
+                        Toggle(isOn: $showPasswordToggle) {
+                            Text("设置密码")
+                        }.onChange(of: showPasswordToggle) { newValue in
+                            if newValue {
+                                showPassword = true
+                            } else {
+                                PasswordManager.savePassword("")
+                            }
+                        }
                     }
-                    Button("设置替身密码") {
-                        
+                    
+                    HStack {
+                        Toggle(isOn: $showSubstitutePasswordToggle) {
+                            Text("设置替身密码")
+                        }.onChange(of: showSubstitutePasswordToggle) { newValue in
+                            if newValue {
+                                showSubstitutePassword = true
+                            } else {
+                                PasswordManager.saveSubstitutePassword("")
+                            }
+                        }
                     }
                 } header: {
                     Text("安全")
@@ -149,7 +170,10 @@ struct YLMine: View {
             .navigationTitle("设置")
         }
         .sheet(isPresented: $showPassword) {
-            PasswordView(showPassword: $showPassword)
+            PasswordView(showPassword: $showPassword, manager: PasswordManager(type: .password))
+        }
+        .sheet(isPresented: $showSubstitutePassword) {
+            PasswordView(showPassword: $showSubstitutePassword, manager: PasswordManager(type: .substitutePassword))
         }
     }
 }
