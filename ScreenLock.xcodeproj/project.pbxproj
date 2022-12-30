@@ -11,6 +11,8 @@
 		5536D3C8295E80C700D78D46 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5536D3C7295E80C700D78D46 /* LocationManager.swift */; };
 		5536D3CB295E81D300D78D46 /* PasswordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5536D3CA295E81D300D78D46 /* PasswordManager.swift */; };
 		5536D3CD295E823F00D78D46 /* Animial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5536D3CC295E823F00D78D46 /* Animial.swift */; };
+		5536D3CF295EBFDB00D78D46 /* NoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5536D3CE295EBFDB00D78D46 /* NoteListView.swift */; };
+		5536D3D1295EC9CC00D78D46 /* NoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5536D3D0295EC9CC00D78D46 /* NoteManager.swift */; };
 		55A29D5C295ACCC900C01933 /* ScreenLockApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A29D5B295ACCC900C01933 /* ScreenLockApp.swift */; };
 		55A29D60295ACCCB00C01933 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A29D5F295ACCCB00C01933 /* Assets.xcassets */; };
 		55A29D63295ACCCB00C01933 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A29D62295ACCCB00C01933 /* Preview Assets.xcassets */; };
@@ -45,6 +47,8 @@
 		5536D3C7295E80C700D78D46 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		5536D3CA295E81D300D78D46 /* PasswordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordManager.swift; sourceTree = "<group>"; };
 		5536D3CC295E823F00D78D46 /* Animial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animial.swift; sourceTree = "<group>"; };
+		5536D3CE295EBFDB00D78D46 /* NoteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListView.swift; sourceTree = "<group>"; };
+		5536D3D0295EC9CC00D78D46 /* NoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteManager.swift; sourceTree = "<group>"; };
 		55A29D58295ACCC900C01933 /* ScreenLock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScreenLock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A29D5B295ACCC900C01933 /* ScreenLockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLockApp.swift; sourceTree = "<group>"; };
 		55A29D5F295ACCCB00C01933 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -101,6 +105,7 @@
 		5536D3C0295D6D9800D78D46 /* Edit */ = {
 			isa = PBXGroup;
 			children = (
+				5536D3CE295EBFDB00D78D46 /* NoteListView.swift */,
 			);
 			path = Edit;
 			sourceTree = "<group>";
@@ -126,6 +131,7 @@
 				5536D3C7295E80C700D78D46 /* LocationManager.swift */,
 				55A29D90295BF3E200C01933 /* ScreenLockManager.swift */,
 				5536D3CA295E81D300D78D46 /* PasswordManager.swift */,
+				5536D3D0295EC9CC00D78D46 /* NoteManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -324,7 +330,9 @@
 			files = (
 				55A29D68295ACCCB00C01933 /* ScreenLock.xcdatamodeld in Sources */,
 				5536D3C5295D84CC00D78D46 /* PasswordView.swift in Sources */,
+				5536D3CF295EBFDB00D78D46 /* NoteListView.swift in Sources */,
 				55A29D8F295BEB6000C01933 /* ScreenCardView.swift in Sources */,
+				5536D3D1295EC9CC00D78D46 /* NoteManager.swift in Sources */,
 				5536D3C8295E80C700D78D46 /* LocationManager.swift in Sources */,
 				5536D3CD295E823F00D78D46 /* Animial.swift in Sources */,
 				55A29D91295BF3E200C01933 /* ScreenLockManager.swift in Sources */,

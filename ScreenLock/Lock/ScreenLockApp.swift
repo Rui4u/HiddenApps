@@ -40,15 +40,13 @@ struct ScreenLockApp: App {
                                 }
                             }
                             ScreenLockManager.update()
-                            
                         }
                 } else {
-                    Text("笔记")
+                    NoteListView()
                 }
             }
         }
     }
 }
-
 
 

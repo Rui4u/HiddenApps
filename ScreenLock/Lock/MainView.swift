@@ -135,6 +135,7 @@ struct YLMine: View {
                                 showPassword = true
                             } else {
                                 PasswordManager.savePassword("")
+                                updatePasswordSwitch()
                             }
                         }
                     }
@@ -142,14 +143,20 @@ struct YLMine: View {
                     HStack {
                         Toggle(isOn: $showSubstitutePasswordToggle) {
                             Text("设置替身密码")
-                        }.onChange(of: showSubstitutePasswordToggle) { newValue in
+                        }
+                        .onChange(of: showSubstitutePasswordToggle) { newValue in
                             if newValue {
                                 showSubstitutePassword = true
                             } else {
                                 PasswordManager.saveSubstitutePassword("")
+                                updatePasswordSwitch()
                             }
                         }
-                    }
+                    }.disabled(!showPasswordToggle)
+
+                    
+                        
+                    
                 } header: {
                     Text("安全")
                 } footer: {
@@ -161,6 +168,9 @@ struct YLMine: View {
                     Button("购买 / 恢复") {
                         
                     }
+                    Button("自定义图标") {
+                        
+                    }
                 } header: {
                     Text("Pro")
                 } footer: {
@@ -169,12 +179,25 @@ struct YLMine: View {
             }
             .navigationTitle("设置")
         }
-        .sheet(isPresented: $showPassword) {
+        .onAppear {
+            updatePasswordSwitch()
+        }
+        .sheet(isPresented: $showPassword , onDismiss: {
+            updatePasswordSwitch()
+        }) {
             PasswordView(showPassword: $showPassword, manager: PasswordManager(type: .password))
         }
-        .sheet(isPresented: $showSubstitutePassword) {
+        .sheet(isPresented: $showSubstitutePassword, onDismiss: {
+            updatePasswordSwitch()
+        }) {
             PasswordView(showPassword: $showSubstitutePassword, manager: PasswordManager(type: .substitutePassword))
         }
+    }
+    
+    func updatePasswordSwitch() {
+        let open = PasswordManager.updatePasswordSwitch()
+        showPasswordToggle = open.a
+        showSubstitutePasswordToggle = open.b
     }
 }
 

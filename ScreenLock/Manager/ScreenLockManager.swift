@@ -140,7 +140,7 @@ class ScreenLockManager: ObservableObject {
 }
 
 struct IconManager {
-    func changeIcon() {
+    static func changeIcon() {
         /// 获取当前所有的 AppIcon 集
         if let iconsDict = Bundle.main.object(forInfoDictionaryKey: "CFBundleIcons") as? [String:Any] {
             if let alternateIcons = iconsDict["CFBundleAlternateIcons"] as? [String:Any] {
@@ -159,8 +159,9 @@ struct IconManager {
         })
 
         /// 恢复默认应用图标
+    }
+    static func defaultIcon() {
         UIApplication.shared.setAlternateIconName(nil, completionHandler: nil)
-
     }
 }
 

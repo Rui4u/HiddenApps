@@ -97,5 +97,14 @@ struct PasswordManager : Codable {
         LocationManager.save(password, key: "substitute_password")
     }
     
-    
+    static func updatePasswordSwitch() -> (a: Bool, b:Bool) {
+        let a = PasswordManager.loadLocatinPassword().count != 0
+        var b = PasswordManager.loadLocatinSubstitutePassword().count != 0
+        
+        if !a {
+            saveSubstitutePassword("")
+            b = false
+        }
+        return (a, b)
+    }
 }
