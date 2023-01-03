@@ -24,6 +24,7 @@
 		55A29D8F295BEB6000C01933 /* ScreenCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A29D8E295BEB6000C01933 /* ScreenCardView.swift */; };
 		55A29D91295BF3E200C01933 /* ScreenLockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A29D90295BF3E200C01933 /* ScreenLockManager.swift */; };
 		55EE44002963D4690067C674 /* PaymentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EE43FF2963D4690067C674 /* PaymentManager.swift */; };
+		55EE4403296428E30067C674 /* BackgroundTasks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55EE4402296428E30067C674 /* BackgroundTasks.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		55A29D8E295BEB6000C01933 /* ScreenCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCardView.swift; sourceTree = "<group>"; };
 		55A29D90295BF3E200C01933 /* ScreenLockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLockManager.swift; sourceTree = "<group>"; };
 		55EE43FF2963D4690067C674 /* PaymentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentManager.swift; sourceTree = "<group>"; };
+		55EE4402296428E30067C674 /* BackgroundTasks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BackgroundTasks.framework; path = System/Library/Frameworks/BackgroundTasks.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55EE4403296428E30067C674 /* BackgroundTasks.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +149,7 @@
 				55A29D70295ACCCB00C01933 /* ScreenLockTests */,
 				55A29D7A295ACCCB00C01933 /* ScreenLockUITests */,
 				55A29D59295ACCC900C01933 /* Products */,
+				55EE4401296428E30067C674 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -199,6 +203,14 @@
 				55A29D7D295ACCCB00C01933 /* ScreenLockUITestsLaunchTests.swift */,
 			);
 			path = ScreenLockUITests;
+			sourceTree = "<group>";
+		};
+		55EE4401296428E30067C674 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				55EE4402296428E30067C674 /* BackgroundTasks.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
