@@ -10,7 +10,7 @@ import FamilyControls
 import ManagedSettings
 import DeviceActivity
 import Foundation
-
+import StoreKit
 struct MainView: View {
     @State private var selection: Tab = .featured
     
@@ -117,6 +117,7 @@ struct YLMine: View {
     
     @State var showPasswordToggle = false;
     @State var showSubstitutePasswordToggle = false;
+    let payManager = PaymentManager()
     var body: some View {
         NavigationView {
             List {
@@ -166,7 +167,7 @@ struct YLMine: View {
                 
                 Section {
                     Button("购买 / 恢复") {
-                        
+                        payManager.buy()
                     }
                     Button("自定义图标") {
                         

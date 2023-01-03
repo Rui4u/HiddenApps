@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "袜子.png",
+      "filename" : "jishiben.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "袜子 1.png",
+      "filename" : "jishiben 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "袜子 2.png",
+      "filename" : "jishiben 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

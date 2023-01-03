@@ -23,6 +23,7 @@
 		55A29D8D295AF70100C01933 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A29D8C295AF70100C01933 /* MainView.swift */; };
 		55A29D8F295BEB6000C01933 /* ScreenCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A29D8E295BEB6000C01933 /* ScreenCardView.swift */; };
 		55A29D91295BF3E200C01933 /* ScreenLockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A29D90295BF3E200C01933 /* ScreenLockManager.swift */; };
+		55EE44002963D4690067C674 /* PaymentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EE43FF2963D4690067C674 /* PaymentManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		55A29D8C295AF70100C01933 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		55A29D8E295BEB6000C01933 /* ScreenCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCardView.swift; sourceTree = "<group>"; };
 		55A29D90295BF3E200C01933 /* ScreenLockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLockManager.swift; sourceTree = "<group>"; };
+		55EE43FF2963D4690067C674 /* PaymentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 				55A29D90295BF3E200C01933 /* ScreenLockManager.swift */,
 				5536D3CA295E81D300D78D46 /* PasswordManager.swift */,
 				5536D3D0295EC9CC00D78D46 /* NoteManager.swift */,
+				55EE43FF2963D4690067C674 /* PaymentManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55EE44002963D4690067C674 /* PaymentManager.swift in Sources */,
 				55A29D68295ACCCB00C01933 /* ScreenLock.xcdatamodeld in Sources */,
 				5536D3C5295D84CC00D78D46 /* PasswordView.swift in Sources */,
 				5536D3CF295EBFDB00D78D46 /* NoteListView.swift in Sources */,
@@ -509,6 +513,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -530,10 +535,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = ScreenLock/ScreenLock.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ScreenLock/Preview Content\"";
-				DEVELOPMENT_TEAM = 3CGKDFZPAL;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ScreenLock/Info.plist;
@@ -542,6 +548,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -549,6 +556,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sr.screenlook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
