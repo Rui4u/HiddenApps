@@ -100,6 +100,7 @@ struct ScreenLockApp: App {
     let deviceActivityCenter = DeviceActivityCenter()
     @ObservedObject var launchManager = LaunchManager.shared
     @State var showAuthority = true
+    var factory = MainViewFactory()
     
     var body: some Scene {
         
