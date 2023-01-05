@@ -84,9 +84,10 @@ struct PasswordView: View {
                                     if newValue == manager.locationPassword {
                                         showPassword = false
                                         password = ""
+                                        LaunchManager.shared.launchType = .main
                                     } else if newValue == manager.locationSubstitutePassword {
                                         showPassword = false
-                                        LaunchManager.shared.type = .note
+                                        LaunchManager.shared.launchType = .note
                                         password = ""
                                     } else {
                                         withAnimation {

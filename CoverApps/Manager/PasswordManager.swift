@@ -14,18 +14,23 @@ class LaunchManager: ObservableObject {
     enum LaunchType {
         case main
         case note
+        case password
     }
     @Published var updateAuthority: Bool = false
     @Published var isAuthority: Bool = true
-    @Published var type : LaunchType = .main
+    @Published var launchType : LaunchType = .main
     @Published var passManager = PasswordManager(type: .inputPassword)
-    @Published var showPasswordView = false
     static let shared = LaunchManager()
     
-    fileprivate init(type: LaunchType = .main, passManager: PasswordManager = PasswordManager(type: .inputPassword), showPasswordView: Bool = false) {
-        self.type = type
+    fileprivate init(type: LaunchType = .main, passManager: PasswordManager = PasswordManager(type: .inputPassword)) {
+        self.launchType = type
         self.passManager = passManager
-        self.showPasswordView = showPasswordView
+    }
+    
+    static func updatePassword() {
+        if (shared.passManager.setPassword.maxCount == shared.passManager.locationPassword.count) {
+            shared.launchType = .password
+        }
     }
 }
 
