@@ -6,6 +6,17 @@
 //
 
 import Foundation
+import FMDB
+import SQLite3
+
+struct FMDBManager {
+    let db: FMDatabase
+    static func initTable(name: String) {
+        NSHomeDirectory().append("Documents/userBase")
+        db = FMDatabase(path: Path)
+        let success = db.open(withFlags: :SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
+    }
+}
 
 struct LocationManager {
     static func save(_ value: Encodable, key:String) {
