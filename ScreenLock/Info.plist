@@ -4,7 +4,6 @@
 <dict>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
-		<string>com.hiddenApps.refresh2</string>
 		<string>com.hiddenApps.refresh</string>
 	</array>
 	<key>UIBackgroundModes</key>

@@ -9,9 +9,10 @@ import SwiftUI
 import FamilyControls
 import DeviceActivity
 import BackgroundTasks
+
 class SceneDelegate: NSObject, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
-        // ...
+        LaunchManager.shared.updateAuthority = true;
     }
     
     
@@ -20,24 +21,26 @@ class SceneDelegate: NSObject, UIWindowSceneDelegate {
     }
     
     func sceneWillResignActive(_ scene: UIScene) {
-        // ...
+        LaunchManager.shared.showPasswordView = LaunchManager.shared.passManager.setPassword.maxCount == LaunchManager.shared.passManager.locationPassword.count
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
+        
         BGTaskScheduler.shared.cancelAllTaskRequests()
             scheduleAppRefresh()
     }
     // ...
 }
 
-class AppDelegate:NSObject,UIApplicationDelegate{
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+class AppDelegate:NSObject,UIApplicationDelegate {
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         LaunchManager.shared.showPasswordView = LaunchManager.shared.passManager.setPassword.maxCount == LaunchManager.shared.passManager.locationPassword.count
         
         BGTaskScheduler.shared.register(forTaskWithIdentifier: "com.hiddenApps.refresh", using: DispatchQueue.main) { task in
             self.handleAppRefresh(task: task as! BGAppRefreshTask)
         }
-        
+                
         return true
     }
     
@@ -81,7 +84,7 @@ func scheduleAppRefresh() {
     let request = BGAppRefreshTaskRequest(identifier: "com.hiddenApps.refresh")
     // Fetch no earlier than 15 minutes from now.
     request.earliestBeginDate = Date(timeIntervalSinceNow: 1 * 60)
-    
+
     do {
         try BGTaskScheduler.shared.submit(request)
     } catch {
@@ -93,33 +96,47 @@ func scheduleAppRefresh() {
 @main
 struct ScreenLockApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
-    let center = AuthorizationCenter.shared
+    @ObservedObject var center = AuthorizationCenter.shared
     let deviceActivityCenter = DeviceActivityCenter()
     @ObservedObject var launchManager = LaunchManager.shared
+    @State var showAuthority = true
     
     var body: some Scene {
+        
         WindowGroup {
             if (LaunchManager.shared.showPasswordView) {
                 PasswordView(showPassword: $launchManager.showPasswordView, manager: launchManager.passManager)
             } else {
                 if (LaunchManager.shared.type == .main) {
-                    MainView()
+                    MainView(showIsAuthority: $showAuthority)
                         .onAppear {
-                            Task {
-                                do {
-                                    try await center.requestAuthorization(for: .individual)
-                                } catch {
-                                    print(error)
-                                }
-                            }
+                            gotoRequestAuthorization()
                             ScreenLockManager.update()
                         }
+                        .onReceive(launchManager.$updateAuthority) { bool in
+                            gotoRequestAuthorization()
+                        }
+                        .onReceive(center.$authorizationStatus) { status in
+                            showAuthority = status == .approved
+                        }
+                    
                 } else {
                     NoteListView()
                 }
             }
         }
     }
+    
+    func gotoRequestAuthorization() {
+        Task {
+            do {
+                try await center.requestAuthorization(for: .individual)
+            } catch {
+                showAuthority = false
+            }
+        }
+    }
+
 }
 
 

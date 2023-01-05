@@ -72,6 +72,8 @@ extension ScreenLockGroup {
 
 class ScreenLockManager: ObservableObject {
     static var manager = ScreenLockManager()
+    
+    @Published var authorization: Bool = false
     @Published var dataSource : [ScreenLockGroup] = [ScreenLockGroup]()
     
     static func update() {

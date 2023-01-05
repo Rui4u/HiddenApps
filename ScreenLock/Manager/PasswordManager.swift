@@ -15,6 +15,8 @@ class LaunchManager: ObservableObject {
         case main
         case note
     }
+    @Published var updateAuthority: Bool = false
+    @Published var isAuthority: Bool = true
     @Published var type : LaunchType = .main
     @Published var passManager = PasswordManager(type: .inputPassword)
     @Published var showPasswordView = false

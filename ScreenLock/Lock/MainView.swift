@@ -13,38 +13,43 @@ import Foundation
 import StoreKit
 struct MainView: View {
     @State private var selection: Tab = .featured
-    
     enum Tab {
         case featured
         case setting
     }
+
     
-    init() {
-        UITabBar.appearance().backgroundColor = .white //设置背景色，否则背景色为透明颜色
-    }
+    @Binding var showIsAuthority: Bool
     
     var body: some View {
-        TabView(selection: $selection) {
-            CategoryHome()
-                .tabItem{//使用label 创建tabitem图文
-                    Label("应用程序", systemImage: "apps.iphone.badge.plus")
-                }
-                .tag(Tab.featured)
-            
-            YLMine()
-                .tabItem {
-                    Label("设置", systemImage: "gear")
-                }
-                .tag(Tab.setting)
+        if (showIsAuthority) {
+            TabView(selection: $selection) {
+                CategoryHome()
+                    .tabItem{//使用label 创建tabitem图文
+                        Label("应用程序", systemImage: "apps.iphone.badge.plus")
+                    }
+                    .tag(Tab.featured)
+                
+                YLMine()
+                    .tabItem {
+                        Label("设置", systemImage: "gear")
+                    }
+                    .tag(Tab.setting)
+            }
+            .onAppear {
+                UITabBar.appearance().backgroundColor = .white //设置背景色，否则背景色为透明颜色
+            }
+            .accentColor(.blue) //设置文字默认选中颜色
+        } else {
+            Text("请授权")
         }
-        .accentColor(.blue) //设置文字默认选中颜色
     }
 }
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
-    }
-}
+//struct MainView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MainView(showIsAuthority: .cons)
+//    }
+//}
 
 struct CategoryHome: View {
     @ObservedObject var manager: ScreenLockManager = ScreenLockManager.manager
@@ -154,9 +159,9 @@ struct YLMine: View {
                             }
                         }
                     }.disabled(!showPasswordToggle)
-
                     
-                        
+                    
+                    
                     
                 } header: {
                     Text("安全")
