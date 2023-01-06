@@ -17,37 +17,48 @@ struct ScreenCardView: View {
     @ObservedObject var group :ScreenLockGroup
     let cornerRadius: CGFloat = 10
     var body: some View {
-        ZStack {
-            VStack {
-                CardViewMainView(group: group,selection: $selection)
-                Spacer(minLength:30)
-                HStack {
-                    Button {
+        VStack (spacing: 4){
+            CardViewMainView(group: group,selection: $selection)
+                .swipeActions(edge: .leading) {
+                    Button (){
                         group.open.toggle()
                         ScreenLockManager.saveGroup(group: group)
                         hiddenIsOpen(isOpen: group.open, name: group.name)
+
                     } label: {
-                        ZStack {
-                            if (group.open) {
-                                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                                    .stroke(group.open ? .white : .blue, lineWidth: 2)
-                                    .background(group.open ? .blue : .white)
-                                    .cornerRadius(cornerRadius)
-                            } else {
-                                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                                    .stroke(group.open ? .white : .blue, lineWidth: 2)
-                                    .background(group.open ? .blue : .white)
-                            }
-                                
-                            HStack {
-                                Image(systemName: group.open ? "eye.slash" : "eye.slash.fill")
-                                    .foregroundColor(group.open ? .white : .blue)
-                                Text(group.open ? "已隐藏" : "待隐藏")
-                                    .foregroundColor(group.open ? .white : .blue)
-                            }
+                        Label(group.open ? "隐藏": "开启", systemImage: "delete")
+                    }.tint(.orange)
+                }
+            Rectangle().frame(height: 10)
+                .foregroundColor(.white)
+                
+            HStack {
+                Button {
+                    group.open.toggle()
+                    ScreenLockManager.saveGroup(group: group)
+                    hiddenIsOpen(isOpen: group.open, name: group.name)
+                } label: {
+                    ZStack {
+                        if (group.open) {
+                            RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                                .stroke(group.open ? .white : .blue, lineWidth: 2)
+                                .background(group.open ? .blue : .white)
+                                .cornerRadius(cornerRadius)
+                        } else {
+                            RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                                .stroke(group.open ? .white : .blue, lineWidth: 2)
+                                .background(group.open ? .blue : .white)
                         }
-                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
+                        
+                        HStack {
+                            Image(systemName: group.open ? "eye.slash" : "eye.slash.fill")
+                                .foregroundColor(group.open ? .white : .blue)
+                            Text(group.open ? "已隐藏".myLocalizedString : "待隐藏".myLocalizedString)
+                                .foregroundColor(group.open ? .white : .blue)
+                        }
                     }
+                    .frame(height: 45)
+                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
                 }
             }
         }
@@ -73,10 +84,10 @@ struct CardViewMainView: View {
                 Text(group.name)
                     .font(.title2)
                     .fontWeight(.bold)
-                    .foregroundColor(.blue)
                 Spacer()
-                Text(group.count > 0 ? String(group.count) : "请添加")
-                    .fontWeight(.bold)
+                Text(group.count > 0 ? String(group.count) : "请添加".myLocalizedString)
+                    .foregroundColor(.blue)
+                    .font(group.count > 0 ? .title : .system(size: 16))
             }
         }
         .swipeActions(edge: .trailing) {
@@ -170,4 +181,34 @@ extension View {
             }
         }
      }
+}
+
+/** 国际化的拓展 */
+extension String{
+    var myLocalizedString:String{
+        get{
+            return NSLocalizedString(self, comment: self)
+        }
+    }
+}
+
+struct ScreenCardView_Previews: PreviewProvider {
+    static var previews: some View {
+        List() {
+            Section {
+                ScreenCardView(group: ScreenLockGroup(name: "应用分组1", open: true, count: 10, applicationTokens: Set<ApplicationToken>(), webDomainTokens: Set<WebDomainToken>(), activityCategoryTokens: Set<ActivityCategoryToken>()))
+                ScreenCardView(group: ScreenLockGroup(name: "应用分组1", open: true, count: 10, applicationTokens: Set<ApplicationToken>(), webDomainTokens: Set<WebDomainToken>(), activityCategoryTokens: Set<ActivityCategoryToken>()))
+                ScreenCardView(group: ScreenLockGroup(name: "应用分组1", open: true, count: 0, applicationTokens: Set<ApplicationToken>(), webDomainTokens: Set<WebDomainToken>(), activityCategoryTokens: Set<ActivityCategoryToken>()))
+            }
+        }
+    }
+}
+
+
+
+struct CardViewMainView_Previews: PreviewProvider {
+    static var previews: some View {
+        CardViewMainView(group: ScreenLockGroup(name: "应用分组1", open: true, count: 0, applicationTokens: Set<ApplicationToken>(), webDomainTokens: Set<WebDomainToken>(), activityCategoryTokens: Set<ActivityCategoryToken>()), selection:
+                .constant(FamilyActivitySelection(includeEntireCategory: true)))
+    }
 }

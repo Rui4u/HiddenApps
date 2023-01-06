@@ -18,6 +18,7 @@
 		553D30F32966738E0060D121 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553D30F22966738E0060D121 /* SceneDelegate.swift */; };
 		553D30F5296673A10060D121 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553D30F4296673A10060D121 /* AppDelegate.swift */; };
 		553D30F7296674140060D121 /* BGAppRefreshTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553D30F6296674140060D121 /* BGAppRefreshTool.swift */; };
+		5563104F2967FCE500A7C6D2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 556310512967FCE500A7C6D2 /* Localizable.strings */; };
 		55A29D5C295ACCC900C01933 /* CoverApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A29D5B295ACCC900C01933 /* CoverApps.swift */; };
 		55A29D60295ACCCB00C01933 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A29D5F295ACCCB00C01933 /* Assets.xcassets */; };
 		55A29D63295ACCCB00C01933 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A29D62295ACCCB00C01933 /* Preview Assets.xcassets */; };
@@ -66,6 +67,8 @@
 		553D30F4296673A10060D121 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		553D30F6296674140060D121 /* BGAppRefreshTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGAppRefreshTool.swift; sourceTree = "<group>"; };
 		553D30F829667CF90060D121 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		556310502967FCE500A7C6D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		556310522967FE4800A7C6D2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		55A29D58295ACCC900C01933 /* CoverApps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoverApps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A29D5B295ACCC900C01933 /* CoverApps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverApps.swift; sourceTree = "<group>"; };
 		55A29D5F295ACCCB00C01933 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -166,9 +169,18 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		5563104C2967FCC100A7C6D2 /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				556310512967FCE500A7C6D2 /* Localizable.strings */,
+			);
+			path = Language;
+			sourceTree = "<group>";
+		};
 		55A29D4F295ACCC900C01933 = {
 			isa = PBXGroup;
 			children = (
+				5563104C2967FCC100A7C6D2 /* Language */,
 				55A29D5A295ACCC900C01933 /* CoverApps */,
 				55A29D70295ACCCB00C01933 /* CoverAppsTests */,
 				55A29D7A295ACCCB00C01933 /* CoverAppsUITests */,
@@ -350,6 +362,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 55A29D4F295ACCC900C01933;
 			productRefGroup = 55A29D59295ACCC900C01933 /* Products */;
@@ -369,6 +382,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55A29D63295ACCCB00C01933 /* Preview Assets.xcassets in Resources */,
+				5563104F2967FCE500A7C6D2 /* Localizable.strings in Resources */,
 				55A29D60295ACCCB00C01933 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -548,11 +562,24 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		556310512967FCE500A7C6D2 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				556310502967FCE500A7C6D2 /* en */,
+				556310522967FE4800A7C6D2 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		55A29D7F295ACCCB00C01933 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -599,7 +626,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -613,6 +640,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -653,7 +681,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -676,7 +704,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CoverApps/Preview Content\"";
-				DEVELOPMENT_TEAM = 3CGKDFZPAL;
+				DEVELOPMENT_TEAM = 9SM75PAX9D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CoverApps/Info.plist;
@@ -690,8 +718,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sr.screenlook;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sr.covers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -713,7 +741,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CoverApps/Preview Content\"";
-				DEVELOPMENT_TEAM = 3CGKDFZPAL;
+				DEVELOPMENT_TEAM = 9SM75PAX9D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CoverApps/Info.plist;
@@ -727,8 +755,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sr.screenlook;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sr.covers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

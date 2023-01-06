@@ -24,15 +24,15 @@ struct MainView: View {
     var body: some View {
         if (showIsAuthority) {
             TabView(selection: $selection) {
-                CategoryHome()
+                Home()
                     .tabItem{//使用label 创建tabitem图文
-                        Label("应用程序", systemImage: "apps.iphone.badge.plus")
+                        Label("应用程序".myLocalizedString, systemImage: "apps.iphone.badge.plus")
                     }
                     .tag(Tab.featured)
                 
                 YLMine()
                     .tabItem {
-                        Label("设置", systemImage: "gear")
+                        Label("设置".myLocalizedString, systemImage: "gear")
                     }
                     .tag(Tab.setting)
             }
@@ -45,16 +45,16 @@ struct MainView: View {
         }
     }
 }
-//struct MainView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MainView(showIsAuthority: .cons)
-//    }
-//}
+struct Home_Previews: PreviewProvider {
+    static var previews: some View {
+        Home()
+    }
+}
 
-struct CategoryHome: View {
+struct Home: View {
     @ObservedObject var manager: ScreenLockManager = ScreenLockManager.manager
     @State var presentEdit: Bool = false
-    @State var groupName: String = ""
+    @State var groupName: String = "应用分组"
     @State var showToast: Bool = false
     @State var showToastMessage = "已有组名重复，请重新命名";
     var body: some View {
@@ -62,13 +62,13 @@ struct CategoryHome: View {
             List {
                 ForEach(manager.dataSource) { item in
                     Section {
-                        ScreenCardView(group: item).frame(height: 150)
+                        ScreenCardView(group: item)
                             .listRowBackground(Color.white)
                     }
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("应用程序")
+            .navigationTitle("应用程序".myLocalizedString)
             .toolbar {
                 ToolbarItem {
                     Button(action: addItem) {
