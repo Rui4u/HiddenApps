@@ -10,14 +10,38 @@ import FMDB
 import SQLite3
 import SwiftUI
 
-//class FMDBManager: NSObject {
-//    let db: FMDatabase?
-//    func initTable(name: String) {
-////        NSHomeDirectory().append("Documents/userBase")
-////        db = FMDatabase(path: Path)
-////        let success = db.open(withFlags: :SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
-//    }
-//}
+class FMDBManager: NSObject {
+    var db: FMDatabase? = nil
+    func initTable(name: String) {
+        let path = NSHomeDirectory().appending("/Documents/userBase/" + name + ".db")
+        db = FMDatabase(path: path)
+        guard let db = db  else {
+            return
+        }
+        self.db = db
+        var success = db.open(withFlags:SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
+        
+        let sql = "CREATE TABLE IF NOT EXISTS `note`(`title`, `text`, `time`, `author`, `group`)"
+        success = db.executeUpdate(sql, withArgumentsIn: [String]())
+        
+        if !success {
+            print("失败")
+        }
+        inset(table: name, title: "123", text: "123", time: "123", author: "123", group: "123")
+        
+    }
+    
+    func inset(table: String, title: String, text:String, time: String, author: String, group: String) {
+        
+        let sql = "INSERT INTO \(table) (`title`, `text`, `time`, `author`, `group`)VALUES(?,?,?,?,?)"
+        guard let db = db else {
+            return
+        }
+        let bool = db.executeUpdate(sql, withArgumentsIn: ["123","123","123","123","123"])
+    }
+}
+
+
 
 struct LocationManager {
     static func save(_ value: Encodable, key:String) {

@@ -9,14 +9,13 @@ import Foundation
 import StoreKit
 
 class PaymentManager: NSObject{
-
     
     func buy() {
         guard SKPaymentQueue.canMakePayments() else {
             return
         }
         
-        let reqeust = SKProductsRequest.init(productIdentifiers: Set(["950012"]))
+        let reqeust = SKProductsRequest.init(productIdentifiers: Set(["123456"]))
         reqeust.delegate = self
         reqeust.start()
     }

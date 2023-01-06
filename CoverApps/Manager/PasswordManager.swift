@@ -28,6 +28,8 @@ class LaunchManager: ObservableObject {
     }
     
     static func updatePassword() {
+//        LaunchManager.shared.launchType = .note
+//        return
         if (shared.passManager.setPassword.maxCount == shared.passManager.locationPassword.count) {
             shared.launchType = .password
         }
