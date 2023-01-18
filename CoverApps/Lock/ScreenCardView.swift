@@ -182,22 +182,14 @@ extension View {
      }
 }
 
-///** 国际化的拓展 */
-//extension String{
-//    var myLocalizedString:String{
-//        get{
-//            return NSLocalizedString(self, comment: self)
-//        }
-//    }
-//}
 
 struct ScreenCardView_Previews: PreviewProvider {
     static var previews: some View {
         List() {
             Section {
-                ScreenCardView(group: ScreenLockGroup(name: "应用分组1", open: true, count: 10, applicationTokens: Set<ApplicationToken>(), webDomainTokens: Set<WebDomainToken>(), activityCategoryTokens: Set<ActivityCategoryToken>()))
-                ScreenCardView(group: ScreenLockGroup(name: "应用分组1", open: true, count: 10, applicationTokens: Set<ApplicationToken>(), webDomainTokens: Set<WebDomainToken>(), activityCategoryTokens: Set<ActivityCategoryToken>()))
-                ScreenCardView(group: ScreenLockGroup(name: "应用分组1", open: true, count: 0, applicationTokens: Set<ApplicationToken>(), webDomainTokens: Set<WebDomainToken>(), activityCategoryTokens: Set<ActivityCategoryToken>()))
+                ScreenCardView(group: ScreenLockGroup(name: "应用分组1", open: true, count: 10))
+                ScreenCardView(group: ScreenLockGroup(name: "应用分组1", open: true, count: 10))
+                ScreenCardView(group: ScreenLockGroup(name: "应用分组1", open: true, count: 0))
             }
         }
     }
@@ -207,7 +199,7 @@ struct ScreenCardView_Previews: PreviewProvider {
 
 struct CardViewMainView_Previews: PreviewProvider {
     static var previews: some View {
-        CardViewMainView(group: ScreenLockGroup(name: "应用分组1", open: true, count: 0, applicationTokens: Set<ApplicationToken>(), webDomainTokens: Set<WebDomainToken>(), activityCategoryTokens: Set<ActivityCategoryToken>()), selection:
-                .constant(FamilyActivitySelection(includeEntireCategory: true)))
+        CardViewMainView(group: ScreenLockGroup(name: "应用分组1", open: true, count: 0),
+                         selection: .constant(FamilyActivitySelection(includeEntireCategory: true)))
     }
 }
