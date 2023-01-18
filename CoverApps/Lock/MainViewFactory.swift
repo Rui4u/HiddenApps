@@ -13,13 +13,12 @@ import DeviceActivity
 struct MainViewFactory {
     @ObservedObject var center = AuthorizationCenter.shared
     @ObservedObject var launchManager = LaunchManager.shared
-    @Binding var showAuthority: Bool
     
     @ViewBuilder
     func mainView() -> some View{
         switch launchManager.launchType {
         case .main:
-            MainView(showIsAuthority: $showAuthority)
+            MainView()
                 .onAppear {
                     gotoRequestAuthorization()
                     ScreenLockManager.update()
@@ -28,11 +27,11 @@ struct MainViewFactory {
                     gotoRequestAuthorization()
                 }
                 .onReceive(center.$authorizationStatus) { status in
-                    showAuthority = status == .approved
+                    launchManager.showAuthority = status == .approved
                 }
             
         case .password:
-            PasswordView(showPassword: .constant(true), manager: launchManager.passManager)
+            PasswordView(isShow: .constant(true), manager: launchManager.passManager)
             
         case .note:
             NoteListView()
@@ -44,7 +43,7 @@ struct MainViewFactory {
             do {
                 try await center.requestAuthorization(for: .individual)
             } catch {
-                showAuthority = false
+                launchManager.showAuthority = false
             }
         }
     }

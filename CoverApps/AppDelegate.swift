@@ -12,7 +12,6 @@ class AppDelegate:NSObject,UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         LaunchManager.updatePassword()
-        FMDBManager().initTable(name: "note")
         BGTaskScheduler.shared.register(forTaskWithIdentifier: "com.hiddenApps.refresh", using: DispatchQueue.main) { task in
             self.handleAppRefresh(task: task as! BGAppRefreshTask)
         }

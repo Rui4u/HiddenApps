@@ -83,12 +83,12 @@ struct SettingPage: View {
         .sheet(isPresented: $showPassword , onDismiss: {
             updatePasswordSwitch()
         }) {
-            PasswordView(showPassword: $showPassword, manager: PasswordManager(type: .password))
+            PasswordView(isShow: $showPassword, manager: PasswordManager(type: .password))
         }
         .sheet(isPresented: $showSubstitutePassword, onDismiss: {
             updatePasswordSwitch()
         }) {
-            PasswordView(showPassword: $showSubstitutePassword, manager: PasswordManager(type: .substitutePassword))
+            PasswordView(isShow: $showSubstitutePassword, manager: PasswordManager(type: .substitutePassword))
         }
     }
     

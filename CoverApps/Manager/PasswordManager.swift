@@ -20,6 +20,8 @@ class LaunchManager: ObservableObject {
     @Published var isAuthority: Bool = true
     @Published var launchType : LaunchType = .main
     @Published var passManager = PasswordManager(type: .inputPassword)
+    @Published var showAuthority: Bool = false
+
     static let shared = LaunchManager()
     
     fileprivate init(type: LaunchType = .main, passManager: PasswordManager = PasswordManager(type: .inputPassword)) {
@@ -28,8 +30,6 @@ class LaunchManager: ObservableObject {
     }
     
     static func updatePassword() {
-//        LaunchManager.shared.launchType = .note
-//        return
         if (shared.passManager.setPassword.maxCount == shared.passManager.locationPassword.count) {
             shared.launchType = .password
         }

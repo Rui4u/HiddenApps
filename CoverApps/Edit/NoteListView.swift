@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import module_SwiftUI
 
 struct NoteListView: View {
     @ObservedObject var manager = NoteManager.shared

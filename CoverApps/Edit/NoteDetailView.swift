@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import module_SwiftUI
 
 struct NoteDetailView: View {
     @EnvironmentObject var coordinator: Coordinator

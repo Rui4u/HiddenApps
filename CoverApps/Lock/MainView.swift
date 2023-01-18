@@ -12,16 +12,16 @@ import DeviceActivity
 import Foundation
 import StoreKit
 struct MainView: View {
+    @EnvironmentObject var center : AuthorizationCenter
+    @EnvironmentObject var launchManager : LaunchManager
     @State private var selection: Tab = .featured
     enum Tab {
         case featured
         case setting
     }
     
-    @Binding var showIsAuthority: Bool
-    
     var body: some View {
-        if (showIsAuthority) {
+        if (launchManager.showAuthority) {
             TabView(selection: $selection) {
                 HomePage()
                     .tabItem{

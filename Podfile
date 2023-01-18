@@ -4,7 +4,10 @@
 target 'CoverApps' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-  pod 'FMDB'
+  pod 'lib-foundation', :path => '../../SubModule/lib-foundation'
+  pod 'lib-base', :path => '../../SubModule/lib-base'
+  pod 'module-SwiftUI', :path => '../../SubModule/module-SwiftUI'
+  
   # Pods for CoverApps
 
   target 'CoverAppsTests' do

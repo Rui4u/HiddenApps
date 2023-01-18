@@ -15,11 +15,12 @@ struct CoverApps: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @ObservedObject var center = AuthorizationCenter.shared
     @ObservedObject var launchManager = LaunchManager.shared
-    @State var showAuthority = true
-    
+    var factory = MainViewFactory()
     var body: some Scene {
         WindowGroup {
-            MainViewFactory(showAuthority: $showAuthority).mainView()
+            self.factory.mainView()
+                .environmentObject(center)
+                .environmentObject(launchManager)
                 .onAppear {
                   UINavigationController().navigationBar.backItem?.title = "Back"
                 }
