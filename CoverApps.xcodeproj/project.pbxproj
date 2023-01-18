@@ -21,6 +21,9 @@
 		55949D1029778EEA00DE40E7 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55949D0F29778EEA00DE40E7 /* HomePage.swift */; };
 		55949D1229778F0800DE40E7 /* SettingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55949D1129778F0800DE40E7 /* SettingPage.swift */; };
 		55949D1B2977926400DE40E7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55949D192977926400DE40E7 /* Localizable.strings */; };
+		55949D1D2977A52600DE40E7 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55949D1C2977A52600DE40E7 /* Coordinator.swift */; };
+		55949D1F2977A6CB00DE40E7 /* NoteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55949D1E2977A6CB00DE40E7 /* NoteDetailView.swift */; };
+		55949D212977A72800DE40E7 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55949D202977A72800DE40E7 /* Route.swift */; };
 		55A29D5C295ACCC900C01933 /* CoverApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A29D5B295ACCC900C01933 /* CoverApps.swift */; };
 		55A29D60295ACCCB00C01933 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A29D5F295ACCCB00C01933 /* Assets.xcassets */; };
 		55A29D63295ACCCB00C01933 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A29D62295ACCCB00C01933 /* Preview Assets.xcassets */; };
@@ -72,6 +75,9 @@
 		55949D0F29778EEA00DE40E7 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		55949D1129778F0800DE40E7 /* SettingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPage.swift; sourceTree = "<group>"; };
 		55949D1A2977926400DE40E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
+		55949D1C2977A52600DE40E7 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		55949D1E2977A6CB00DE40E7 /* NoteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailView.swift; sourceTree = "<group>"; };
+		55949D202977A72800DE40E7 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		55A29D58295ACCC900C01933 /* CoverApps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoverApps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A29D5B295ACCC900C01933 /* CoverApps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverApps.swift; sourceTree = "<group>"; };
 		55A29D5F295ACCCB00C01933 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -143,6 +149,9 @@
 			isa = PBXGroup;
 			children = (
 				5536D3CE295EBFDB00D78D46 /* NoteListView.swift */,
+				55949D1C2977A52600DE40E7 /* Coordinator.swift */,
+				55949D1E2977A6CB00DE40E7 /* NoteDetailView.swift */,
+				55949D202977A72800DE40E7 /* Route.swift */,
 			);
 			path = Edit;
 			sourceTree = "<group>";
@@ -522,10 +531,13 @@
 				553D30F5296673A10060D121 /* AppDelegate.swift in Sources */,
 				5536D3C5295D84CC00D78D46 /* PasswordView.swift in Sources */,
 				5536D3CF295EBFDB00D78D46 /* NoteListView.swift in Sources */,
+				55949D1D2977A52600DE40E7 /* Coordinator.swift in Sources */,
 				55949D1029778EEA00DE40E7 /* HomePage.swift in Sources */,
 				553D30F129666B5A0060D121 /* MainViewFactory.swift in Sources */,
 				55A29D8F295BEB6000C01933 /* ScreenCardView.swift in Sources */,
 				553D30F7296674140060D121 /* BGAppRefreshTool.swift in Sources */,
+				55949D1F2977A6CB00DE40E7 /* NoteDetailView.swift in Sources */,
+				55949D212977A72800DE40E7 /* Route.swift in Sources */,
 				5536D3D1295EC9CC00D78D46 /* NoteManager.swift in Sources */,
 				55949D1229778F0800DE40E7 /* SettingPage.swift in Sources */,
 				5536D3C8295E80C700D78D46 /* LocationManager.swift in Sources */,

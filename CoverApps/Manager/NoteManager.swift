@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NoteListModel: Identifiable, Codable, Hashable{
+struct NoteModel: Identifiable, Codable, Hashable{
     var title: String
     var content: String
     var time: Date
@@ -24,12 +24,12 @@ struct NoteListModel: Identifiable, Codable, Hashable{
 
 class NoteManager: ObservableObject {
     static var shared = NoteManager()
-    @Published var dataSource = [NoteListModel]()
+    @Published var dataSource = [NoteModel]()
     
     private let key = "note_key"
     
-    static func save(note: NoteListModel) {
-        var list = LocationManager.find([NoteListModel].self, key: shared.key) ?? [NoteListModel]()
+    static func save(note: NoteModel) {
+        var list = LocationManager.find([NoteModel].self, key: shared.key) ?? [NoteModel]()
         if let index = list.firstIndex(where: {$0.id == note.id}) {
             list[index] = note
         } else {
@@ -40,13 +40,13 @@ class NoteManager: ObservableObject {
     }
     
     static func update() {
-        let list = LocationManager.find([NoteListModel].self, key: shared.key) ?? [NoteListModel]()
+        let list = LocationManager.find([NoteModel].self, key: shared.key) ?? [NoteModel]()
         shared.dataSource  = list.reversed()
     }
     
-    static func delete(note: NoteListModel) {
+    static func delete(note: NoteModel) {
         
-        var list = LocationManager.find([NoteListModel].self, key: shared.key) ?? [NoteListModel]()
+        var list = LocationManager.find([NoteModel].self, key: shared.key) ?? [NoteModel]()
         list = list.filter({$0.id != note.id})
         LocationManager.save(list, key: shared.key)
         update()
