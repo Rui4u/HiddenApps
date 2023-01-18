@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NoteListModel: ObservableObject,Identifiable, Codable{
+struct NoteListModel: Identifiable, Codable, Hashable{
     var title: String
     var content: String
     var time: Date

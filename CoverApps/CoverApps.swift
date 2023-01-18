@@ -20,7 +20,13 @@ struct CoverApps: App {
     var body: some Scene {
         WindowGroup {
             MainViewFactory(showAuthority: $showAuthority).mainView()
+                .onAppear {
+                  UINavigationController().navigationBar.backItem?.title = "Back"
+                }
+                .environment(\.locale, .init(identifier: "zh-Hans"))
+//                .environment(\.locale, .init(identifier: "en"))
         }
+        
     }
 }
 

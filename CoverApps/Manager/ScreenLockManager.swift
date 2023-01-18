@@ -39,7 +39,7 @@ class ScreenLockGroup: Identifiable, ObservableObject {
         return self.name
     }
     
-    init(name: String, open: Bool, count: Int, applicationTokens: Set<ApplicationToken>, webDomainTokens: Set<WebDomainToken>, activityCategoryTokens: Set<ActivityCategoryToken>) {
+    init(name: String, open: Bool, count: Int, applicationTokens: Set<ApplicationToken> = Set<ApplicationToken>(), webDomainTokens: Set<WebDomainToken> = Set<WebDomainToken>(), activityCategoryTokens: Set<ActivityCategoryToken> = Set<ActivityCategoryToken>()) {
         self.name = name
         self.open = open
         self.count = count

@@ -10,35 +10,24 @@ import SwiftUI
 
 struct NoteDetailView: View {
     @EnvironmentObject var coordinator: Coordinator
-    var item : NoteListModel
-    @Binding var dataSource: [NoteListModel]
-    var index : Int? {
-        return dataSource.firstIndex(where: {$0.id == item.id})
-    }
+    @State var item : NoteListModel
     var body: some View {
-        if let index = index {
-            VStack {
-                TextField("标题", text: $dataSource[index].title)
-                    .padding(EdgeInsets(top: 0, leading: 17, bottom: 0, trailing: 17))
-                    .fontWeight(.bold)
-                    .font(.title2)
-                TextEditingView(fullText: $dataSource[index].content)
-                    .padding(EdgeInsets(top: 0, leading: 14, bottom: 0, trailing: 14))
-            }
-            .onAppear {
+        VStack {
+            TextField("标题", text: $item.title)
+                .padding(EdgeInsets(top: 0, leading: 17, bottom: 0, trailing: 17))
+                .fontWeight(.bold)
+                .font(.title2)
+            TextEditingView(fullText: $item.content)
+                .padding(EdgeInsets(top: 0, leading: 14, bottom: 0, trailing: 14))
+        }
+        .toolbar {
+            Button{
+                NoteManager.save(note: item)
+                coordinator.pop()
                 
+            } label: {
+                Image(systemName: "checkmark")
             }
-            .toolbar {
-                Button{
-                    NoteManager.save(note: item)
-                    coordinator.pop()
-                    
-                } label: {
-                    Image(systemName: "checkmark")
-                }
-            }
-        } else {
-            Text("测试")
         }
     }
 }
@@ -97,16 +86,12 @@ struct NoteListView: View {
     var body: some View {
         NavigationStack(path: $coordinator.path) {
             List(manager.dataSource) { source in
-                let index = manager.dataSource.firstIndex(where: {source.id == $0.id})
-                NavigationLink(value: index) {
-                    
+                NavigationLink(value: source) {
                     NoteListItem(item: source)
                 }
             }
-            .navigationDestination(for: Int.self) { index  in
-                if let index = index {
-                    NoteDetailView(item: manager.dataSource[index], dataSource: $manager.dataSource)
-                }
+            .navigationDestination(for: NoteListModel.self) { data  in
+                NoteDetailView(item: data)
             }
             .navigationTitle("我的笔记")
             .navigationBarTitleDisplayMode(.inline)

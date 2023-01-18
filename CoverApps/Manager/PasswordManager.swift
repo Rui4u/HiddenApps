@@ -47,13 +47,13 @@ struct PasswordManager : Codable {
             func title() -> String{
                 switch self {
                 case .first:
-                    return "输入密码".myLocalizedString
+                    return "输入密码"
                 case .second:
-                    return "确认密码".myLocalizedString
+                    return "确认密码"
                 case .error:
-                    return "密码不一致，请重新输入".myLocalizedString
+                    return "密码不一致，请重新输入"
                 case .inputError:
-                    return "密码错误".myLocalizedString
+                    return "密码错误" 
                 }
                 
                 

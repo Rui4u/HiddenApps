@@ -23,7 +23,6 @@ struct ScreenCardView: View {
                     Button (){
                         group.open.toggle()
                         ScreenLockManager.saveGroup(group: group)
-                        hiddenIsOpen(isOpen: group.open, name: group.name)
 
                     } label: {
                         Label(group.open ? "隐藏": "开启", systemImage: "delete")
@@ -36,7 +35,6 @@ struct ScreenCardView: View {
                 Button {
                     group.open.toggle()
                     ScreenLockManager.saveGroup(group: group)
-                    hiddenIsOpen(isOpen: group.open, name: group.name)
                 } label: {
                     ZStack {
                         if (group.open) {
@@ -53,7 +51,7 @@ struct ScreenCardView: View {
                         HStack {
                             Image(systemName: group.open ? "eye.slash" : "eye.slash.fill")
                                 .foregroundColor(group.open ? .white : .blue)
-                            Text(group.open ? "已隐藏".myLocalizedString : "待隐藏".myLocalizedString)
+                            Text(group.open ? "已隐藏"  : "待隐藏" )
                                 .foregroundColor(group.open ? .white : .blue)
                         }
                     }
@@ -62,10 +60,6 @@ struct ScreenCardView: View {
                 }
             }
         }
-    }
-    
-    func hiddenIsOpen(isOpen: Bool, name:String) {
-        group.open = isOpen
     }
     
 }
@@ -85,7 +79,7 @@ struct CardViewMainView: View {
                     .font(.title2)
                     .fontWeight(.bold)
                 Spacer()
-                Text(group.count > 0 ? String(group.count) : "请添加".myLocalizedString)
+                Text(group.count > 0 ? String(group.count) : "请添加" )
                     .foregroundColor(.blue)
                     .font(group.count > 0 ? .title : .system(size: 16))
             }
@@ -111,16 +105,21 @@ struct CardViewMainView: View {
             }
             
             let applicationsTokens = selection.applicationTokens
-            let webDomainsTokens = selection.webDomainTokens
+//            let webDomainsTokens = selection.webDomainTokens
             let categoryTokens = selection.categoryTokens
             
             ManagedSettingsStore(named: ManagedSettingsStore.Name(group.name)).clearAllSettings()
-            group.count = applicationsTokens.count + webDomainsTokens.count
+            group.count = applicationsTokens.count
+            
             group.applicationTokens = applicationsTokens
-            group.webDomainTokens = webDomainsTokens
+//            group.webDomainTokens = webDomainsTokens
             group.activityCategoryTokens = categoryTokens;
             group.count = group.updateCount
+            if group.count == 0 {
+                group.open = false
+            }
             ScreenLockManager.saveGroup(group: group)
+            
             
         }
         .onAppear {
@@ -183,14 +182,14 @@ extension View {
      }
 }
 
-/** 国际化的拓展 */
-extension String{
-    var myLocalizedString:String{
-        get{
-            return NSLocalizedString(self, comment: self)
-        }
-    }
-}
+///** 国际化的拓展 */
+//extension String{
+//    var myLocalizedString:String{
+//        get{
+//            return NSLocalizedString(self, comment: self)
+//        }
+//    }
+//}
 
 struct ScreenCardView_Previews: PreviewProvider {
     static var previews: some View {
