@@ -14,6 +14,7 @@ struct SettingPage: View {
     
     @State var showPasswordToggle = false;
     @State var showSubstitutePasswordToggle = false;
+    @State var showToast = false
     let payManager = PaymentManager()
     var body: some View {
         NavigationView {
@@ -77,6 +78,10 @@ struct SettingPage: View {
             }
             .navigationTitle("设置")
         }
+        .onReceive(payManager.$showToast, perform: { value in
+            showToast = value
+        })
+        .toast(isShow: $showToast, info:payManager.message, duration: 1)
         .onAppear {
             updatePasswordSwitch()
         }
