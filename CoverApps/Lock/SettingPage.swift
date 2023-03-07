@@ -63,16 +63,16 @@ struct SettingPage: View {
                 
                 
                 Section {
-                    Button("购买 / 恢复") {
+                    Button("捐赠") {
                         payManager.buy()
                     }
-                    Button("自定义图标") {
-                        
-                    }
+//                    Button("自定义图标") {
+//                        IconManager.changeIcon()
+//                    }
                 } header: {
-                    Text("Pro")
+                    Text("感谢一下开发者小哥哥吧~  😘")
                 } footer: {
-                    Text("一次性升级，不限制隐藏App数量以及分组")
+//                    Text("一次性升级，不限制隐藏App数量以及分组")
                 }
             }
             .navigationTitle("设置")

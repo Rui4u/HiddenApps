@@ -18,6 +18,7 @@
 		553D30F32966738E0060D121 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553D30F22966738E0060D121 /* SceneDelegate.swift */; };
 		553D30F5296673A10060D121 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553D30F4296673A10060D121 /* AppDelegate.swift */; };
 		553D30F7296674140060D121 /* BGAppRefreshTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553D30F6296674140060D121 /* BGAppRefreshTool.swift */; };
+		5581434C29B6D29500B96272 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5581434A29B6D29500B96272 /* Localizable.strings */; };
 		55949D1029778EEA00DE40E7 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55949D0F29778EEA00DE40E7 /* HomePage.swift */; };
 		55949D1229778F0800DE40E7 /* SettingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55949D1129778F0800DE40E7 /* SettingPage.swift */; };
 		55949D1B2977926400DE40E7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55949D192977926400DE40E7 /* Localizable.strings */; };
@@ -71,6 +72,7 @@
 		553D30F4296673A10060D121 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		553D30F6296674140060D121 /* BGAppRefreshTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGAppRefreshTool.swift; sourceTree = "<group>"; };
 		553D30F829667CF90060D121 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		5581434B29B6D29500B96272 /* zch */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zch; path = Localizable.strings; sourceTree = "<group>"; };
 		55949D0F29778EEA00DE40E7 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		55949D1129778F0800DE40E7 /* SettingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPage.swift; sourceTree = "<group>"; };
 		55949D1A2977926400DE40E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
@@ -180,6 +182,14 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		5581434929B6D29500B96272 /* zh-Hans.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				5581434A29B6D29500B96272 /* Localizable.strings */,
+			);
+			path = "zh-Hans.lproj";
+			sourceTree = SOURCE_ROOT;
+		};
 		55949D182977926400DE40E7 /* en.lproj */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +223,7 @@
 		55A29D5A295ACCC900C01933 /* CoverApps */ = {
 			isa = PBXGroup;
 			children = (
+				5581434929B6D29500B96272 /* zh-Hans.lproj */,
 				55949D182977926400DE40E7 /* en.lproj */,
 				553D30F6296674140060D121 /* BGAppRefreshTool.swift */,
 				55A29D5B295ACCC900C01933 /* CoverApps.swift */,
@@ -393,6 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55A29D63295ACCCB00C01933 /* Preview Assets.xcassets in Resources */,
+				5581434C29B6D29500B96272 /* Localizable.strings in Resources */,
 				55949D1B2977926400DE40E7 /* Localizable.strings in Resources */,
 				55A29D60295ACCCB00C01933 /* Assets.xcassets in Resources */,
 			);
@@ -578,6 +590,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		5581434A29B6D29500B96272 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5581434B29B6D29500B96272 /* zch */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		55949D192977926400DE40E7 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -717,7 +737,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.0.0;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				DEVELOPMENT_ASSET_PATHS = "\"CoverApps/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 9SM75PAX9D;
@@ -757,7 +777,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.0.0;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				DEVELOPMENT_ASSET_PATHS = "\"CoverApps/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 9SM75PAX9D;
@@ -778,7 +798,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sr.covers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DistributionCovers;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Distribution_CoversApp;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -22,9 +22,10 @@ struct CoverApps: App {
                 .environmentObject(center)
                 .environmentObject(launchManager)
                 .onAppear {
+                    
                   UINavigationController().navigationBar.backItem?.title = "Back"
                 }
-                .environment(\.locale, .init(identifier: "zh-Hans"))
+//                .environment(\.locale, .init(identifier: "zh-Hans"))
 //                .environment(\.locale, .init(identifier: "en"))
         }
         

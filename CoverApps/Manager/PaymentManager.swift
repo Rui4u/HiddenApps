@@ -15,7 +15,7 @@ class PaymentManager: NSObject{
             return
         }
         
-        let reqeust = SKProductsRequest.init(productIdentifiers: Set(["123456"]))
+        let reqeust = SKProductsRequest.init(productIdentifiers: Set(["111111"]))
         reqeust.delegate = self
         reqeust.start()
     }

@@ -88,7 +88,6 @@ struct CardViewMainView: View {
             Button (role: .destructive){
                 ScreenLockManager.delete(id:group.id)
                 ManagedSettingsStore(named: ManagedSettingsStore.Name(group.name)).clearAllSettings()
-
             } label: {
                 Label("删除", systemImage: "delete")
             }
