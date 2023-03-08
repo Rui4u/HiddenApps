@@ -10,14 +10,14 @@ import StoreKit
 
 class PaymentManager: NSObject{
     
-    @Published var message: String = "购买成功"
+    @Published var message: String = "开发小哥哥收到礼物啦~  非常感谢😘😘"
+    @Published var showLoading: Bool = false
     @Published var showToast: Bool = false
     func buy() {
         guard SKPaymentQueue.canMakePayments() else {
             return
         }
-        message = "正在获取"
-        showToast = true
+        showLoading = true
         let reqeust = SKProductsRequest.init(productIdentifiers: Set(["111111"]))
         reqeust.delegate = self
         reqeust.start()
@@ -44,7 +44,7 @@ extension PaymentManager: SKProductsRequestDelegate, SKPaymentTransactionObserve
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         DispatchQueue.main.async {
-            self.showToast = false
+            self.showLoading = false
         }
         for item in transactions {
             switch item.transactionState {
@@ -52,7 +52,7 @@ extension PaymentManager: SKProductsRequestDelegate, SKPaymentTransactionObserve
             case .purchasing:
                 print("购买中")
             case .purchased:
-                print("交易完成")
+                showToast = true
             case .failed:
                 print("交易失败")
             case .restored:

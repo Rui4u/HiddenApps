@@ -84,7 +84,8 @@ struct SettingPage: View {
                 .navigationTitle("设置")
                 .navigationBarTitleDisplayMode(.inline)
             }
-            .onReceive(payManager.$showToast) { showLoading = $0 }
+            .onReceive(payManager.$showLoading) { showLoading = $0 }
+            .onReceive(payManager.$showToast) { showToast = $0 }
             .onReceive(passwordManager.$isPresent) {
                 passwordManager.reset()
                 passwordViewPresent = $0
