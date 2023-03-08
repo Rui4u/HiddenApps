@@ -15,13 +15,14 @@ class LaunchManager: ObservableObject {
         case note
         case password
     }
+    
+    static let shared = LaunchManager()
+    
     @Published var updateAuthority: Bool = false
     @Published var isAuthority: Bool = true
     @Published var launchType : LaunchType = .main
     @Published var passManager = PasswordManager(type: .inputPassword)
     @Published var showAuthority: Bool = false
-
-    static let shared = LaunchManager()
     
     fileprivate init(type: LaunchType = .main, passManager: PasswordManager = PasswordManager(type: .inputPassword)) {
         self.launchType = type
@@ -36,7 +37,6 @@ class LaunchManager: ObservableObject {
 }
 
 class PasswordManager : ObservableObject {
-    
     struct SetPassword : Codable {
         enum Status:Codable {
             case first
@@ -57,6 +57,7 @@ class PasswordManager : ObservableObject {
                 }
             }
         }
+        
         var status: Status = .first
         var password1: String = ""
         var password2: String = ""
@@ -72,20 +73,18 @@ class PasswordManager : ObservableObject {
         case substitutePassword
         case inputPassword
     }
-    var type : ManagerType
-    var setPassword : SetPassword = SetPassword()
-    var locationPassword: String {
-        PasswordManager.loadLocatinPassword()
-    }
-    
-    var locationSubstitutePassword: String {
-        PasswordManager.loadLocatinSubstitutePassword()
-    }
     
     @Published var password : String = ""
     @Published var isPresent = false
     @Published var attempts: Int = 0
     
+    var type : ManagerType
+    var setPassword : SetPassword = SetPassword()
+    
+    var locationPassword: String { PasswordManager.loadLocatinPassword() }
+    var locationSubstitutePassword: String { PasswordManager.loadLocatinSubstitutePassword() }
+    
+
     init(type: ManagerType) {
         self.type = type
     }
@@ -94,14 +93,12 @@ class PasswordManager : ObservableObject {
         self.password = ""
         self.setPassword = SetPassword()
     }
-    
-    
-    
+   
     static func loadLocatinPassword() -> String {
-        if let locationPassword = LocationManager.find(String.self,key: "password") {
-            return locationPassword
+        guard let locationPassword = LocationManager.find(String.self,key: "password") else {
+            return ""
         }
-        return ""
+        return locationPassword
     }
     
     static func savePassword(_ password: String) {
@@ -109,10 +106,10 @@ class PasswordManager : ObservableObject {
     }
     
     static func loadLocatinSubstitutePassword() -> String {
-        if let locationPassword = LocationManager.find(String.self,key: "substitute_password") {
-            return locationPassword
+        guard let locationPassword = LocationManager.find(String.self,key: "substitute_password") else {
+            return ""
         }
-        return ""
+        return locationPassword
     }
     
     static func saveSubstitutePassword(_ password: String) {

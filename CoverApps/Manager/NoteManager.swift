@@ -24,6 +24,7 @@ struct NoteModel: Identifiable, Codable, Hashable{
 
 class NoteManager: ObservableObject {
     static var shared = NoteManager()
+    
     @Published var dataSource = [NoteModel]()
     
     private let key = "note_key"

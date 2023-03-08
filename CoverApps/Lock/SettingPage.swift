@@ -18,9 +18,10 @@ struct SettingPage: View {
     @State var showPasswordToggle = false;
     @State var showSubstitutePasswordToggle = false;
     @State var showToast = false
+    @State var showLoading = false
     let payManager = PaymentManager()
     var body: some View {
-        LoadingView(isShowing: $showToast)  {
+        LoadingView(isShowing: $showLoading)  {
             NavigationView {
                 List {
                     Section("Application"){
@@ -83,7 +84,7 @@ struct SettingPage: View {
                 .navigationTitle("设置")
                 .navigationBarTitleDisplayMode(.inline)
             }
-            .onReceive(payManager.$showToast) { showToast = $0 }
+            .onReceive(payManager.$showToast) { showLoading = $0 }
             .onReceive(passwordManager.$isPresent) {
                 passwordManager.reset()
                 passwordViewPresent = $0

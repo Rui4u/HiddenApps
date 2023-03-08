@@ -29,27 +29,23 @@ extension PaymentManager: SKProductsRequestDelegate, SKPaymentTransactionObserve
     /// 获取列表
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         guard let product = response.products.first else {
-            DispatchQueue.main.async {
-                self.showToast = false
-            }
             return
         }
+        let pament = SKMutablePayment(product: product)
+        pament.applicationUsername = "\(Date().timeIntervalSince1970)"
+        SKPaymentQueue.default().add(pament)
+        SKPaymentQueue.default().add(self)
         
-        DispatchQueue.main.async {
-            let pament = SKMutablePayment(product: product)
-            pament.applicationUsername = "用户名称"
-            SKPaymentQueue.default().add(pament)
-            SKPaymentQueue.default().add(self)
-        }
     }
     
     func requestDidFinish(_ request: SKRequest) {
-        DispatchQueue.main.async {
-            self.showToast = false
-        }
+       
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        DispatchQueue.main.async {
+            self.showToast = false
+        }
         for item in transactions {
             switch item.transactionState {
                 
