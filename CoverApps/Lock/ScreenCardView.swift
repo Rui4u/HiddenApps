@@ -16,15 +16,12 @@ struct ScreenCardView: View {
     @State var selection = FamilyActivitySelection(includeEntireCategory: true)
     @ObservedObject var group :ScreenLockGroup
     let cornerRadius: CGFloat = 10
+    @State var showSelctedApp = false
     var body: some View {
         VStack (spacing: 4){
-            CardViewMainView(group: group,selection: $selection)
+            CardViewMainView(group: group,selection: $selection, isPresented:$showSelctedApp)
                 .swipeActions(edge: .leading) {
-                    Button (){
-                        group.open.toggle()
-                        ScreenLockManager.saveGroup(group: group)
-
-                    } label: {
+                    Button(action: openOrCloseGroup) {
                         Label(group.open ? "隐藏": "开启", systemImage: "delete")
                     }.tint(.orange)
                 }
@@ -32,10 +29,7 @@ struct ScreenCardView: View {
                 .foregroundColor(.white)
                 
             HStack {
-                Button {
-                    group.open.toggle()
-                    ScreenLockManager.saveGroup(group: group)
-                } label: {
+                Button(action: openOrCloseGroup) {
                     ZStack {
                         if (group.open) {
                             RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
@@ -62,13 +56,20 @@ struct ScreenCardView: View {
         }
     }
     
+    func openOrCloseGroup() {
+        group.open.toggle()
+        ScreenLockManager.saveGroup(group: group)
+        if (group.count == 0) {
+            self.showSelctedApp = true;
+        }
+    }
 }
 
 struct CardViewMainView: View {
     @ObservedObject var group :ScreenLockGroup
     @Binding var selection : FamilyActivitySelection
 
-    @State var isPresented = false
+    @Binding var isPresented: Bool
     
     var body : some View {
         ZStack {
@@ -84,6 +85,7 @@ struct CardViewMainView: View {
                     .font(group.count > 0 ? .title : .system(size: 16))
             }
         }
+        
         .swipeActions(edge: .trailing) {
             Button (role: .destructive){
                 ScreenLockManager.delete(id:group.id)
@@ -94,10 +96,11 @@ struct CardViewMainView: View {
         }
         .onTapGesture {
             isPresented = true
-        }.familyActivityPicker(isPresented: $isPresented,
+        }
+        
+        .familyActivityPicker(isPresented: $isPresented,
                                selection: $selection)
         .onChange(of: selection) { newSelection in
-            
             
             if ScreenLockManager.compare(selection: selection, group: group) {
                 return
@@ -116,69 +119,23 @@ struct CardViewMainView: View {
             group.count = group.updateCount
             if group.count == 0 {
                 group.open = false
+            } else {
+                group.open = group.open
             }
             ScreenLockManager.saveGroup(group: group)
-            
-            
+        }
+        .onChange(of: isPresented) { newValue in
+            if (isPresented == false) {
+                if group.count == 0 {
+                    group.open = false
+                }
+            }
         }
         .onAppear {
             ScreenLockManager.loadLocatinData(selection: &selection, groupName: group.name)
         }
+        
     }
-}
-
-struct TWToastView: View {
-    @Binding var isShow: Bool
-    let info: String
-    @State private var isShowAnimation: Bool = true
-    @State private var duration : Double
-    
-    init(isShow:Binding<Bool>,info: String = "", duration:Double = 1.0) {
-        self._isShow = isShow
-        self.info = info
-        self.duration = duration
-    }
-    
-    var body: some View {
-        ZStack {
-            Text(info)
-                .font(.system(size: 14))
-                .foregroundColor(.white)
-                .frame(minWidth: 80, alignment: Alignment.center)
-                .zIndex(1.0)
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 12)
-                        .foregroundColor(.black)
-                )
-            
-        }
-        .onAppear() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-                isShowAnimation = false
-            }
-        }
-        .padding()
-        .opacity(isShowAnimation ? 1 : 0)
-        .animation(.easeIn(duration: 0.8))
-        .edgesIgnoringSafeArea(.all)
-        .onChange(of: isShowAnimation) { e in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                self.isShow = false
-            }
-        }
-    }
-}
-
-extension View {
-    func toast(isShow:Binding<Bool>, info:String = "",  duration:Double = 1.0) -> some View {
-        ZStack {
-            self
-            if isShow.wrappedValue {
-                TWToastView(isShow:isShow, info: info, duration: duration)
-            }
-        }
-     }
 }
 
 
@@ -199,6 +156,8 @@ struct ScreenCardView_Previews: PreviewProvider {
 struct CardViewMainView_Previews: PreviewProvider {
     static var previews: some View {
         CardViewMainView(group: ScreenLockGroup(name: "应用分组1", open: true, count: 0),
-                         selection: .constant(FamilyActivitySelection(includeEntireCategory: true)))
+                         selection: .constant(FamilyActivitySelection(includeEntireCategory: true)),
+                         isPresented: .constant(true)
+        )
     }
 }

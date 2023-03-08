@@ -30,26 +30,18 @@ struct HomePage: View {
     @ObservedObject var manager: ScreenLockManager = ScreenLockManager.manager
     @StateObject var addGroupModel = AddGroupModel()
     @State var presentEdit: Bool = false
-    
     var body: some View {
         NavigationView {
-            List {
-                ForEach(manager.dataSource) { item in
-                    Section {
-                        ScreenCardView(group: item)
-                            .listRowBackground(Color.white)
+            HomeMainView(manager: manager, addItem: addItem)
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationTitle("应用程序" )
+                .toolbar {
+                    ToolbarItem {
+                        Button(action: addItem) {
+                            Label("Add Item", systemImage: "plus")
+                        }
                     }
                 }
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("应用程序" )
-            .toolbar {
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
         }
         .alert("添加分组", isPresented: $presentEdit) {
             AddGroupAlert(groupName: $addGroupModel.groupName, show: $addGroupModel.showToast, error: $addGroupModel.errorMessage)
@@ -64,6 +56,28 @@ struct HomePage: View {
     }
 }
 
+struct HomeMainView: View {
+    @ObservedObject var manager: ScreenLockManager = ScreenLockManager.manager
+    var addItem: ()->()
+    var body: some View{
+        if (manager.dataSource.count == 0) {
+            VStack() {
+                Image("undraw_Dog")
+                Text("点击右上角添加分组")
+            }
+        } else {
+            List {
+                ForEach(manager.dataSource) { item in
+                    Section {
+                        ScreenCardView(group: item)
+                            .listRowBackground(Color.white)
+                    }
+                }
+            }
+        }
+    }
+}
+
 
 struct AddGroupAlert: View {
     @Binding var groupName: String
@@ -72,12 +86,13 @@ struct AddGroupAlert: View {
     
     var body: some View {
         TextField("请输入分组名称", text: $groupName)
+        
         HStack {
-            Button ("cancel"){
+            Button ("取消"){
                 
             }.foregroundColor(.red)
             
-            Button("OK") {
+            Button("确定") {
                 if ScreenLockManager.manager.dataSource.filter({$0.name == groupName}).count > 0 {
                     error = "已有组名重复，请重新命名";
                     show = true

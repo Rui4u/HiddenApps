@@ -10,7 +10,6 @@ import Foundation
 
 
 class LaunchManager: ObservableObject {
-    
     enum LaunchType {
         case main
         case note
@@ -36,7 +35,8 @@ class LaunchManager: ObservableObject {
     }
 }
 
-struct PasswordManager : Codable {
+class PasswordManager : ObservableObject {
+    
     struct SetPassword : Codable {
         enum Status:Codable {
             case first
@@ -53,16 +53,15 @@ struct PasswordManager : Codable {
                 case .error:
                     return "密码不一致，请重新输入"
                 case .inputError:
-                    return "密码错误" 
+                    return "密码错误"
                 }
-                
-                
             }
         }
         var status: Status = .first
         var password1: String = ""
         var password2: String = ""
         var maxCount = 6
+        
         func compair() -> Bool {
             return password1 == password2 && password1.count == maxCount
         }
@@ -82,6 +81,20 @@ struct PasswordManager : Codable {
     var locationSubstitutePassword: String {
         PasswordManager.loadLocatinSubstitutePassword()
     }
+    
+    @Published var password : String = ""
+    @Published var isPresent = false
+    @Published var attempts: Int = 0
+    
+    init(type: ManagerType) {
+        self.type = type
+    }
+    
+    func reset() {
+        self.password = ""
+        self.setPassword = SetPassword()
+    }
+    
     
     
     static func loadLocatinPassword() -> String {
@@ -115,5 +128,55 @@ struct PasswordManager : Codable {
             b = false
         }
         return (a, b)
+    }
+    
+    func passwordInputStatus(_ newValue: String) {
+        if (newValue.count > 6) {
+            password = String(newValue.dropFirst(0).prefix(6))
+            return
+        }
+        
+        if type == .substitutePassword || type == .password {
+            if (newValue.count == 6 && setPassword.status == .first) {
+                setPassword.password1 = newValue
+                setPassword.status = .second
+                password = ""
+            } else if newValue.count == 6 && setPassword.status == .second {
+                setPassword.password2 = newValue
+                if (setPassword.compair()) {
+                    if type == .password {
+                        PasswordManager.savePassword(newValue)
+                    } else if type == .substitutePassword {
+                        PasswordManager.saveSubstitutePassword(newValue)
+                    }
+                    
+                    isPresent = false
+                } else {
+                    attempts += 1
+                    setPassword.status = .error
+                    password = ""
+                }
+            } else if password.count > 0 && setPassword.status == .error {
+                setPassword.status = .second
+            }
+        } else if type == .inputPassword {
+            if (newValue.count == 6) {
+                if newValue == locationPassword {
+                    isPresent = false
+                    password = ""
+                    LaunchManager.shared.launchType = .main
+                } else if newValue == locationSubstitutePassword {
+                    isPresent = false
+                    LaunchManager.shared.launchType = .note
+                    password = ""
+                } else {
+                    attempts += 1
+                    setPassword.status = .inputError
+                    password = ""
+                }
+            } else if password.count > 0 && setPassword.status == .inputError  {
+                setPassword.status = .first
+            }
+        }
     }
 }

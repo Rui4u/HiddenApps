@@ -19,6 +19,8 @@
 		553D30F5296673A10060D121 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553D30F4296673A10060D121 /* AppDelegate.swift */; };
 		553D30F7296674140060D121 /* BGAppRefreshTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553D30F6296674140060D121 /* BGAppRefreshTool.swift */; };
 		5581434C29B6D29500B96272 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5581434A29B6D29500B96272 /* Localizable.strings */; };
+		5581435229B72DA600B96272 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5581435129B72DA600B96272 /* LoadingView.swift */; };
+		5581435429B7316200B96272 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5581435329B7316200B96272 /* ToastView.swift */; };
 		55949D1029778EEA00DE40E7 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55949D0F29778EEA00DE40E7 /* HomePage.swift */; };
 		55949D1229778F0800DE40E7 /* SettingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55949D1129778F0800DE40E7 /* SettingPage.swift */; };
 		55949D1B2977926400DE40E7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55949D192977926400DE40E7 /* Localizable.strings */; };
@@ -73,6 +75,8 @@
 		553D30F6296674140060D121 /* BGAppRefreshTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGAppRefreshTool.swift; sourceTree = "<group>"; };
 		553D30F829667CF90060D121 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		5581434B29B6D29500B96272 /* zch */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zch; path = Localizable.strings; sourceTree = "<group>"; };
+		5581435129B72DA600B96272 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		5581435329B7316200B96272 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		55949D0F29778EEA00DE40E7 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		55949D1129778F0800DE40E7 /* SettingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPage.swift; sourceTree = "<group>"; };
 		55949D1A2977926400DE40E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
@@ -165,7 +169,9 @@
 		5536D3C6295E80B900D78D46 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				5581435129B72DA600B96272 /* LoadingView.swift */,
 				5536D3CC295E823F00D78D46 /* Animial.swift */,
+				5581435329B7316200B96272 /* ToastView.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -539,6 +545,8 @@
 				55A29D68295ACCCB00C01933 /* CoverApps.xcdatamodeld in Sources */,
 				553D30F5296673A10060D121 /* AppDelegate.swift in Sources */,
 				5536D3C5295D84CC00D78D46 /* PasswordView.swift in Sources */,
+				5581435229B72DA600B96272 /* LoadingView.swift in Sources */,
+				5581435429B7316200B96272 /* ToastView.swift in Sources */,
 				5536D3CF295EBFDB00D78D46 /* NoteListView.swift in Sources */,
 				55949D1029778EEA00DE40E7 /* HomePage.swift in Sources */,
 				553D30F129666B5A0060D121 /* MainViewFactory.swift in Sources */,

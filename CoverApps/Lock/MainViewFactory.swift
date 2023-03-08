@@ -31,7 +31,8 @@ struct MainViewFactory {
                 }
             
         case .password:
-            PasswordView(isShow: .constant(true), manager: launchManager.passManager)
+            
+            PasswordView(manager: launchManager.passManager)
             
         case .note:
             NoteListView()

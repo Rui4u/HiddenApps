@@ -7,21 +7,21 @@
 
 import SwiftUI
 
+
+
 struct PasswordView: View {
-    @Binding var isShow : Bool
-    @State var manager : PasswordManager
+    @ObservedObject var manager : PasswordManager
     @State var password: String = ""
     @FocusState private var usernameFieldIsFocused: Bool
     
-    @State var attempts: Int = 0
     var body: some View {
         VStack {
-            PasswordViewCloseButton(viewShow: $isShow, showClose: manager.type != .inputPassword)
+            PasswordViewCloseButton(viewShow: $manager.isPresent, showClose: manager.type != .inputPassword)
             
             let error = manager.setPassword.status == .error || manager.setPassword.status == .inputError
-            PasswordOrderView(title: manager.setPassword.status.title(), error: error, attempts: $attempts)
+            PasswordOrderView(title: manager.setPassword.status.title(), error: error, attempts: $manager.attempts)
             
-            PasswordViewInputView(manager: $manager, attempts: $attempts, isShow: $isShow)
+            PasswordViewInputView(manager: manager)
         }
     }
 }
@@ -65,77 +65,24 @@ fileprivate struct PasswordViewCloseButton: View {
 
 fileprivate struct PasswordViewInputView: View {
     
-    @Binding var manager : PasswordManager
-    @State var password: String = ""
+    @ObservedObject var manager : PasswordManager
     @FocusState private var usernameFieldIsFocused: Bool
-    @Binding var attempts: Int
-    @Binding var isShow: Bool
     
     var body: some View {
         ZStack {
             GeometryReader { reader in
                 
-                TextField("密码", text: $password)
+                TextField("密码", text: $manager.password)
                     .focused($usernameFieldIsFocused)
                     .frame(width: reader.size.width, height: 50)
                     .keyboardType(.phonePad)
-                    .onChange(of: password) { newValue in
-                        if (newValue.count > 6) {
-                            password = String(newValue.dropFirst(0).prefix(6))
-                            return
-                        }
-                        
-                        if manager.type == .substitutePassword || manager.type == .password {
-                            if (newValue.count == 6 && manager.setPassword.status == .first) {
-                                manager.setPassword.password1 = newValue
-                                manager.setPassword.status = .second
-                                password = ""
-                            } else if newValue.count == 6 && manager.setPassword.status == .second {
-                                manager.setPassword.password2 = newValue
-                                if (manager.setPassword.compair()) {
-                                    if manager.type == .password {
-                                        PasswordManager.savePassword(newValue)
-                                    } else if manager.type == .substitutePassword {
-                                        PasswordManager.saveSubstitutePassword(newValue)
-                                    }
-                                    
-                                    isShow = false
-                                } else {
-                                    withAnimation {
-                                        attempts += 1
-                                    }
-                                    manager.setPassword.status = .error
-                                    password = ""
-                                }
-                            } else if password.count > 0 && manager.setPassword.status == .error {
-                                manager.setPassword.status = .second
-                            }
-                        } else if manager.type == .inputPassword {
-                            if (newValue.count == 6) {
-                                if newValue == manager.locationPassword {
-                                    isShow = false
-                                    password = ""
-                                    LaunchManager.shared.launchType = .main
-                                } else if newValue == manager.locationSubstitutePassword {
-                                    isShow = false
-                                    LaunchManager.shared.launchType = .note
-                                    password = ""
-                                } else {
-                                    withAnimation {
-                                        attempts += 1
-                                    }
-                                    manager.setPassword.status = .inputError
-                                    password = ""
-                                }
-                            } else if password.count > 0 && manager.setPassword.status == .inputError  {
-                                manager.setPassword.status = .first
-                            }
-                            
-                        }
+                    .onChange(of: manager.password, perform: manager.passwordInputStatus)
+                    .onChange(of: manager.attempts) { newValue in
+                        withAnimation { manager.attempts += 1 }
                     }
                 HStack(spacing:20) {
                     ForEach(0..<6) { index in
-                        Image(systemName:index < password.count ? "circle.fill" : "circle")
+                        Image(systemName:index < manager.password.count ? "circle.fill" : "circle")
                     }
                 }
                 .onTapGesture {
@@ -153,6 +100,6 @@ fileprivate struct PasswordViewInputView: View {
 
 struct PasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        PasswordView(isShow: .constant(true), manager: PasswordManager(type: .inputPassword))
+        PasswordView(manager: PasswordManager(type: .inputPassword) )
     }
 }
