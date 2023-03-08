@@ -105,10 +105,16 @@ class ScreenLockManager: ObservableObject {
     }
     
     static func delete(id: TimeInterval) {
+        let restoreList = manager.dataSource.filter({$0.id == id})
+        if restoreList.count > 0 {
+            for index in 0..<restoreList.count {
+                restoreList[index].open = false
+            }
+        }
         manager.dataSource = manager.dataSource.filter({$0.id != id})
-        var list = LocationManager.find([AppGroup.Location].self, key: "group_key") ?? [AppGroup.Location]()
-        list = list.filter({$0.id != id})
-        LocationManager.save(list, key: "group_key")
+        let list = LocationManager.find([AppGroup.Location].self, key: "group_key") ?? [AppGroup.Location]()
+        let saveList = list.filter({$0.id != id})
+        LocationManager.save(saveList, key: "group_key")
         ScreenLockManager.update()
     }
     

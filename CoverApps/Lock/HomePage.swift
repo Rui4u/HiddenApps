@@ -22,7 +22,12 @@ class AddGroupModel: ObservableObject {
 
 struct HomePage_Previews: PreviewProvider {
     static var previews: some View {
+     
         HomePage()
+            .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch)"))
+
+        HomePage()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
     }
 }
 
