@@ -10,24 +10,28 @@ import ManagedSettings
 import FamilyControls
 import UIKit
 
-class ScreenLockGroup: Identifiable, ObservableObject {
+class AppGroup: Identifiable, ObservableObject {
     @Published var name: String
+    @Published var count: Int = 0
     @Published var open: Bool {
         didSet {
             managedSettingsStore()
         }
     }
-    @Published var count: Int = 0
+    var creatTime: TimeInterval
+    var locationStoreName: String {
+        name + "\(creatTime)"
+    }
     var updateCount: Int {
         applicationTokens.count + webDomainTokens.count + activityCategoryTokens.count
     }
     
     func managedSettingsStore() {
         if open {
-            ManagedSettingsStore(named: ManagedSettingsStore.Name(name)).application.blockedApplications = Set(applicationTokens.map({Application(token: $0)}))
-            ManagedSettingsStore(named: ManagedSettingsStore.Name(name)).shield.webDomains = webDomainTokens
+            ManagedSettingsStore(named: ManagedSettingsStore.Name(locationStoreName)).application.blockedApplications = Set(applicationTokens.map({Application(token: $0)}))
+            ManagedSettingsStore(named: ManagedSettingsStore.Name(locationStoreName)).shield.webDomains = webDomainTokens
         } else {
-            ManagedSettingsStore(named: ManagedSettingsStore.Name(name)).clearAllSettings()
+            ManagedSettingsStore(named: ManagedSettingsStore.Name(locationStoreName)).clearAllSettings()
         }
     }
     
@@ -35,36 +39,53 @@ class ScreenLockGroup: Identifiable, ObservableObject {
     var webDomainTokens: Set<WebDomainToken>
     var activityCategoryTokens: Set<ActivityCategoryToken>
     
-    var id: String {
-        return self.name
+    var id: TimeInterval {
+        return self.creatTime
     }
     
-    init(name: String, open: Bool, count: Int, applicationTokens: Set<ApplicationToken> = Set<ApplicationToken>(), webDomainTokens: Set<WebDomainToken> = Set<WebDomainToken>(), activityCategoryTokens: Set<ActivityCategoryToken> = Set<ActivityCategoryToken>()) {
+    init(name: String,
+         open: Bool,
+         count: Int,
+         creatTime: TimeInterval,
+         applicationTokens: Set<ApplicationToken> = Set<ApplicationToken>(),
+         webDomainTokens: Set<WebDomainToken> = Set<WebDomainToken>(),
+         activityCategoryTokens: Set<ActivityCategoryToken> = Set<ActivityCategoryToken>()) {
         self.name = name
         self.open = open
         self.count = count
+        self.creatTime = creatTime
         self.applicationTokens = applicationTokens
         self.webDomainTokens = webDomainTokens
         self.activityCategoryTokens = activityCategoryTokens
         managedSettingsStore()
     }
 }
-
-extension ScreenLockGroup {
+extension AppGroup {
     
-    struct ScreenLockGroupStruct: Codable {
+    struct Location: Codable {
         var name: String
         var open: Bool
-        var count: Int {
-            applicationTokens.count + webDomainTokens.count + activityCategoryTokens.count
-        }
+        var creatTime: TimeInterval
+        
         var applicationTokens: Set<ApplicationToken>
         var webDomainTokens: Set<WebDomainToken>
         var activityCategoryTokens: Set<ActivityCategoryToken>
+        
+        var count: Int {
+            applicationTokens.count + webDomainTokens.count + activityCategoryTokens.count
+        }
+        var id: TimeInterval {
+            return creatTime
+        }
     }
     
-    func toStruct() -> ScreenLockGroupStruct {
-        ScreenLockGroupStruct(name: name, open: open, applicationTokens: applicationTokens, webDomainTokens: webDomainTokens,activityCategoryTokens: activityCategoryTokens)
+    func toStruct() -> Location {
+        Location(name: name,
+                 open: open,
+                 creatTime: creatTime,
+                 applicationTokens: applicationTokens,
+                 webDomainTokens: webDomainTokens,
+                 activityCategoryTokens: activityCategoryTokens)
     }
 }
 
@@ -74,26 +95,26 @@ class ScreenLockManager: ObservableObject {
     static var manager = ScreenLockManager()
     
     @Published var authorization: Bool = false
-    @Published var dataSource : [ScreenLockGroup] = [ScreenLockGroup]()
+    @Published var dataSource : [AppGroup] = [AppGroup]()
     
     static func update() {
-        let list = LocationManager.find([ScreenLockGroup.ScreenLockGroupStruct].self, key: "group_key")
+        let list = LocationManager.find([AppGroup.Location].self, key: "group_key")
         manager.dataSource = list?.map({
-            ScreenLockGroup(name: $0.name, open: $0.open, count: $0.count, applicationTokens: $0.applicationTokens, webDomainTokens: $0.webDomainTokens, activityCategoryTokens: $0.activityCategoryTokens)
-        }) ?? [ScreenLockGroup]()
+            AppGroup(name: $0.name, open: $0.open, count: $0.count,creatTime: $0.creatTime , applicationTokens: $0.applicationTokens, webDomainTokens: $0.webDomainTokens, activityCategoryTokens: $0.activityCategoryTokens)
+        }) ?? [AppGroup]()
     }
     
-    static func delete(id: String) {
+    static func delete(id: TimeInterval) {
         manager.dataSource = manager.dataSource.filter({$0.id != id})
-        var list = LocationManager.find([ScreenLockGroup.ScreenLockGroupStruct].self, key: "group_key") ?? [ScreenLockGroup.ScreenLockGroupStruct]()
-        list = list.filter({$0.name != id})
+        var list = LocationManager.find([AppGroup.Location].self, key: "group_key") ?? [AppGroup.Location]()
+        list = list.filter({$0.id != id})
         LocationManager.save(list, key: "group_key")
         ScreenLockManager.update()
     }
     
-    static func saveGroup(group: ScreenLockGroup) {
-        var list = LocationManager.find([ScreenLockGroup.ScreenLockGroupStruct].self, key: "group_key") ?? [ScreenLockGroup.ScreenLockGroupStruct]()
-        if let index = list.firstIndex(where: {$0.name == group.name}) {
+    static func save(group: AppGroup) {
+        var list = LocationManager.find([AppGroup.Location].self, key: "group_key") ?? [AppGroup.Location]()
+        if let index = list.firstIndex(where: {$0.id == group.id}) {
             list[index] = group.toStruct()
         } else {
             list.append(group.toStruct())
@@ -102,8 +123,8 @@ class ScreenLockManager: ObservableObject {
         ScreenLockManager.update()
     }
     
-    static func closeAllGroup() {
-        var list = LocationManager.find([ScreenLockGroup.ScreenLockGroupStruct].self, key: "group_key") ?? [ScreenLockGroup.ScreenLockGroupStruct]()
+    static func closeAll() {
+        var list = LocationManager.find([AppGroup.Location].self, key: "group_key") ?? [AppGroup.Location]()
         for index in 0..<list.count {
             list[index].open = false
         }
@@ -111,7 +132,7 @@ class ScreenLockManager: ObservableObject {
         ScreenLockManager.update()
     }
     
-    static func compare(selection : FamilyActivitySelection, group: ScreenLockGroup) -> Bool{
+    static func compare(selection : FamilyActivitySelection, group: AppGroup) -> Bool{
         var isSame = 0
         if (selection.categoryTokens == group.activityCategoryTokens) {
             isSame = isSame + 1
@@ -133,7 +154,7 @@ class ScreenLockManager: ObservableObject {
     
     static func loadLocatinData(selection : inout  FamilyActivitySelection, groupName:String){
         
-        if let locationGroup = LocationManager.find([ScreenLockGroup.ScreenLockGroupStruct].self,key: "group_key")?.filter({$0.name == groupName }).first {
+        if let locationGroup = LocationManager.find([AppGroup.Location].self,key: "group_key")?.filter({$0.name == groupName }).first {
             selection.applicationTokens = locationGroup.applicationTokens
             selection.webDomainTokens = locationGroup.webDomainTokens
             selection.categoryTokens = locationGroup.activityCategoryTokens
@@ -142,24 +163,30 @@ class ScreenLockManager: ObservableObject {
 }
 
 struct IconManager {
-    static func changeIcon() {
+    static func changeIcon(icon: String) {
         /// 获取当前所有的 AppIcon 集
-        if let iconsDict = Bundle.main.object(forInfoDictionaryKey: "CFBundleIcons") as? [String:Any] {
-            if let alternateIcons = iconsDict["CFBundleAlternateIcons"] as? [String:Any] {
-                debugPrint(alternateIcons.keys)
-                alternateIcons.keys.forEach { item in
-                    debugPrint(item)
-                }
-            }
+        guard let iconsDict = Bundle.main.object(forInfoDictionaryKey: "CFBundleIcons") as? [String:Any] else {
+            return
+        }
+        guard let icons = iconsDict["CFBundleAlternateIcons"] as? [String:Any] else {
+            return
         }
 
+        guard let iconName = icons.keys.filter({
+            $0.contains(icon)
+        }).first else {
+            defaultIcon()
+            return
+        }
+       
         /// 更换应用图标
-        UIApplication.shared.setAlternateIconName("Test_AppIcon",completionHandler: { error in
+        UIApplication.shared.setAlternateIconName(iconName,completionHandler: { error in
             if error != nil {
                 print("失败")
             }
         })
-
+        
+        
         /// 恢复默认应用图标
     }
     static func defaultIcon() {

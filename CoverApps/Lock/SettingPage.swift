@@ -19,6 +19,7 @@ struct SettingPage: View {
     @State var showSubstitutePasswordToggle = false;
     @State var showToast = false
     @State var showLoading = false
+    @State var showSelectorIcon = false
     let payManager = PaymentManager()
     var body: some View {
         LoadingView(isShowing: $showLoading)  {
@@ -26,7 +27,7 @@ struct SettingPage: View {
                 List {
                     Section("Application"){
                         Button("还原所有应用程序") {
-                            ScreenLockManager.closeAllGroup()
+                            ScreenLockManager.closeAll()
                         }
                     }
                     
@@ -67,16 +68,16 @@ struct SettingPage: View {
                         Text("设置替身密码后，App会伪装成记事本App")
                     }
                     
+                    Button("自定义图标") {
+                        showSelectorIcon = true
+                    }
                     
                     Section {
                         Button("捐赠") {
                             payManager.buy()
                         }
-    //                    Button("自定义图标") {
-    //                        IconManager.changeIcon()
-    //                    }
                     } header: {
-                        Text("感谢一下开发者小哥哥吧~  😘")
+                        Text("请开发者小哥哥喝杯奶茶~  😘")
                     } footer: {
     //                    Text("一次性升级，不限制隐藏App数量以及分组")
                     }
@@ -108,6 +109,11 @@ struct SettingPage: View {
             }) {
                 PasswordView(manager: substitutePasswordManager)
             }
+            .sheet(isPresented: $showSelectorIcon, content: {
+                AlertIconView(isShow: $showSelectorIcon)
+                .presentationDetents([.height(180)])
+                
+            })
         }
     }
     
@@ -126,3 +132,62 @@ struct SettingPage_Previews: PreviewProvider {
     }
 }
 
+
+
+struct AlertIconView: View {
+    @State var selected: String = ""
+    @Binding var isShow: Bool
+    var body: some View {
+        ZStack {
+            Color.init(white: 0.95)
+                .ignoresSafeArea()
+            VStack {
+                HStack {
+                    ChoseIconItem(selected: $selected, image: "undraw_Dog", title: "Dog", offset: 10,tapAction: tapAction)
+                    ChoseIconItem(selected: $selected, image: "undraw_Cat", title: "Cat", offset: 10,tapAction: tapAction)
+                }
+                
+                Button("确定") {
+                    isShow = false
+                    
+                    IconManager.changeIcon(icon: selected)
+                }
+                .frame(width: 100, height: 40)
+                .foregroundColor(.white)
+                .background(Color.blue)
+                .cornerRadius(10)
+                .padding()
+            }
+        }
+    }
+    
+    func tapAction(title: String) {
+        selected = title
+    }
+}
+
+struct ChoseIconItem: View {
+    @Binding var selected: String
+    var image: String
+    var title: String
+    var offset : CGFloat
+    var tapAction: (String)->()
+    
+    var body: some View {
+        HStack {
+            Image(systemName:selected == title ? "circle.inset.filled" : "circle")
+                .padding()
+            Image(image)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 50, height: 50)
+                .background(Color.white)
+                .cornerRadius(5)
+        }
+        .frame(width: 100, alignment: .center)
+        .padding()
+        .onTapGesture {
+            tapAction(title)
+        }
+    }
+}

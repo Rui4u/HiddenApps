@@ -14,7 +14,7 @@ import DeviceActivity
 struct ScreenCardView: View {
     @State var showToast = false;
     @State var selection = FamilyActivitySelection(includeEntireCategory: true)
-    @ObservedObject var group :ScreenLockGroup
+    @ObservedObject var group :AppGroup
     let cornerRadius: CGFloat = 10
     @State var showSelctedApp = false
     var body: some View {
@@ -58,7 +58,7 @@ struct ScreenCardView: View {
     
     func openOrCloseGroup() {
         group.open.toggle()
-        ScreenLockManager.saveGroup(group: group)
+        ScreenLockManager.save(group: group)
         if (group.count == 0) {
             self.showSelctedApp = true;
         }
@@ -66,7 +66,7 @@ struct ScreenCardView: View {
 }
 
 struct CardViewMainView: View {
-    @ObservedObject var group :ScreenLockGroup
+    @ObservedObject var group :AppGroup
     @Binding var selection : FamilyActivitySelection
 
     @Binding var isPresented: Bool
@@ -122,7 +122,7 @@ struct CardViewMainView: View {
             } else {
                 group.open = group.open
             }
-            ScreenLockManager.saveGroup(group: group)
+            ScreenLockManager.save(group: group)
         }
         .onChange(of: isPresented) { newValue in
             if (isPresented == false) {
@@ -143,9 +143,9 @@ struct ScreenCardView_Previews: PreviewProvider {
     static var previews: some View {
         List() {
             Section {
-                ScreenCardView(group: ScreenLockGroup(name: "应用分组1", open: true, count: 10))
-                ScreenCardView(group: ScreenLockGroup(name: "应用分组1", open: true, count: 10))
-                ScreenCardView(group: ScreenLockGroup(name: "应用分组1", open: true, count: 0))
+                ScreenCardView(group: AppGroup(name: "应用分组1", open: true, count: 10, creatTime: Date().timeIntervalSince1970 + 2))
+                ScreenCardView(group: AppGroup(name: "应用分组1", open: true, count: 10, creatTime: Date().timeIntervalSince1970 + 3))
+                ScreenCardView(group: AppGroup(name: "应用分组1", open: true, count: 0, creatTime: Date().timeIntervalSince1970 + 4))
             }
         }
     }
@@ -155,7 +155,7 @@ struct ScreenCardView_Previews: PreviewProvider {
 
 struct CardViewMainView_Previews: PreviewProvider {
     static var previews: some View {
-        CardViewMainView(group: ScreenLockGroup(name: "应用分组1", open: true, count: 0),
+        CardViewMainView(group: AppGroup(name: "应用分组1", open: true, count: 0, creatTime: Date().timeIntervalSince1970 + 4),
                          selection: .constant(FamilyActivitySelection(includeEntireCategory: true)),
                          isPresented: .constant(true)
         )

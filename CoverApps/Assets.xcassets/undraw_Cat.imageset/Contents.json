@@ -1,17 +1,16 @@
 {
   "images" : [
     {
-      "filename" : "jishiben.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "jishiben 1.png",
+      "filename" : "undraw_Cat@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "jishiben 2.png",
+      "filename" : "undraw_Cat@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

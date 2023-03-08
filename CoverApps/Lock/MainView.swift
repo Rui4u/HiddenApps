@@ -28,7 +28,7 @@ struct MainView: View {
                         Label("应用程序" , systemImage: "apps.iphone.badge.plus")
                     }
                     .tag(Tab.featured)
-                
+
                 SettingPage()
                     .tabItem {
                         Label("设置" , systemImage: "gear")
@@ -40,9 +40,16 @@ struct MainView: View {
             }
             .accentColor(.blue) //设置文字默认选中颜色
         } else {
-            Text("请授权")
+            VStack() {
+                Image("undraw_Dog")
+                Text("请您授权")
+                    .fontWeight(.heavy)
+                Text("如果授权失败，请重新啊打开App")
+                    .foregroundColor(.gray)
+                    .font(.footnote)
+                    .padding()
+            }
         }
     }
 }
-
 

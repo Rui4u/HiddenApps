@@ -88,23 +88,16 @@ struct AddGroupAlert: View {
         TextField("请输入分组名称", text: $groupName)
         
         HStack {
-            Button ("取消"){
-                
-            }.foregroundColor(.red)
+            Button("取消", role: .cancel) {}
+            .foregroundColor(.red)
             
             Button("确定") {
-                if ScreenLockManager.manager.dataSource.filter({$0.name == groupName}).count > 0 {
-                    error = "已有组名重复，请重新命名";
-                    show = true
-                    groupName = ""
-                    return
-                }
                 
                 if (groupName.count > 0) {
-                    ScreenLockManager.saveGroup(group: ScreenLockGroup(name: groupName,
-                                                                       open: false,
-                                                                       count: 0))
-                    groupName = ""
+                    ScreenLockManager.save(group: AppGroup(name: groupName,
+                                                           open: false,
+                                                           count: 0,
+                                                           creatTime: Date().timeIntervalSince1970))
                 }
             }
         }

@@ -25,7 +25,7 @@ struct CoverApps: App {
                     
                   UINavigationController().navigationBar.backItem?.title = "Back"
                 }
-//                .environment(\.locale, .init(identifier: "zh-Hans"))
+                .environment(\.locale, .init(identifier: "zh-Hans"))
 //                .environment(\.locale, .init(identifier: "en"))
         }
         
